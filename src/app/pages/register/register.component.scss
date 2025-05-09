@@ -1,0 +1,92 @@
+/* Page container with flex layout */
+.page-container {
+    display: flex;
+    height: 100vh;
+    width: 100%;
+    background-image: url("../../../assets/background2.png");
+    background-size: cover;
+    background-position: left center; /* Ensure background stays on the left */
+    background-repeat: no-repeat;
+  }
+  
+  /* Container for the login form (right side) */
+  .login-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.7); /* Semi-transparent background */
+    padding: 40px;
+    width: 40%; /* Set the width to occupy the right side */
+    min-width: 320px; /* Set a minimum width for responsiveness */
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Soft shadow for the form */
+    margin-left: auto; /* Push the form to the right */
+  }
+  
+  /* Style the form elements */
+  .login-container h3 {
+    color: #333;
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+  
+  .login-container .form-label {
+    color: #444;
+    font-weight: bold;
+  }
+  
+  .login-container input.form-control {
+    margin-bottom: 15px;
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    transition: border-color 0.3s ease;
+    width: 250px;
+  }
+  
+  .login-container input.form-control:focus {
+    border-color: #007bff; /* Highlight border color on focus */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  }
+  
+  /* Button styling */
+  .login-container .btn-primary {
+  width: 100%;
+  max-width: 400px;
+  padding: 14px 20px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  border-radius: 8px;
+  background-color: #78bdb9;
+  border: none;
+  color: #fff;
+  box-shadow: 0 4px 6px rgba(40, 167, 69, 0.2);
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.login-container .btn-primary:hover {
+  background-color: #218838;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 12px rgba(40, 167, 69, 0.25);
+}
+
+.login-container .btn-primary:active {
+  background-color: #1e7e34;
+  transform: translateY(1px);
+  box-shadow: 0 3px 6px rgba(40, 167, 69, 0.2);
+}
+
+  
+  /* Link styling */
+  .login-container .btn-link {
+    color: #007bff;
+    font-size: 0.9rem;
+    text-decoration: none;
+  }
+  
+  .login-container .btn-link:hover {
+    text-decoration: underline;
+  }
+  

@@ -3,10 +3,11 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './pages/login/login.component';
 import { FormsModule } from '@angular/forms';
 import { RegisterComponent } from './pages/register/register.component';
+import { httpTokenInterceptor } from './services/interceptor/http-token.interceptor';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,12 @@ import { RegisterComponent } from './pages/register/register.component';
     FormsModule
   ],
   providers: [
-    HttpClient
+    HttpClient,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: httpTokenInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

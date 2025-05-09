@@ -43,6 +43,7 @@
     border-radius: 5px;
     border: 1px solid #ccc;
     transition: border-color 0.3s ease;
+    width: 250px;
   }
   
   .login-container input.form-control:focus {
@@ -52,19 +53,31 @@
   
   /* Button styling */
   .login-container .btn-primary {
-    width:35%;
-    padding: 12px;
-    font-size: 1rem;
-    font-weight: bold;
-    border-radius: 5px;
-    background-color: #007bff;
-    border: none;
-    transition: background-color 0.3s ease;
-  }
-  
-  .login-container .btn-primary:hover {
-    background-color: #0056b3; /* Darken the button color on hover */
-  }
+  width: 100%;
+  max-width: 400px;
+  padding: 14px 20px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  border-radius: 8px;
+  background-color: #78bdb9;
+  border: none;
+  color: #fff;
+  box-shadow: 0 4px 6px rgba(40, 167, 69, 0.2);
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.login-container .btn-primary:hover {
+  background-color: #78bdb9;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 12px rgba(40, 167, 69, 0.25);
+}
+
+.login-container .btn-primary:active {
+  background-color: #1e7e34;
+  transform: translateY(1px);
+  box-shadow: 0 3px 6px rgba(40, 167, 69, 0.2);
+}
+
   
   /* Link styling */
   .login-container .btn-link {

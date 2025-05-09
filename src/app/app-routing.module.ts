@@ -11,6 +11,10 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegisterComponent
+  },
+  {
+    path: '',
+    loadChildren: ()=> import('./modules/budget/budget.module').then(m=> m.BudgetModule)
   }
 ];
 

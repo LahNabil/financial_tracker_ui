@@ -1,0 +1,48 @@
+<div class="sidenav" [ngClass]="collapsed ? 'sidenav-collapsed': ''">
+  <div class="logo-container">
+    <button class="logo" (click)="toggleCollapse()">RH</button>
+    <div class="logo-text"  *ngIf="collapsed">Menu</div>
+    <button class="btn-close" *ngIf="collapsed" (click)="closeSidenav()">
+      <i class="fal fa-times close-icon"></i>
+    </button>
+  </div>
+
+<ng-template #navData let-collapsed="collapsed">
+  <ul class="sidenav-nav">
+    <li class="sidenav-nav-item">
+      <a class="sidenav-nav-link" [routerLink]="['/departement']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        <i class="sidenav-link-icon fa fa-building"></i>
+        <span class="sidenav-link-text" @fadeInOut *ngIf="collapsed">Departements</span>
+      </a>
+    </li>
+    <li class="sidenav-nav-item">
+      <a class="sidenav-nav-link" [routerLink]="['/employe']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        <i class="sidenav-link-icon fa-solid fa-user"></i>
+        <span class="sidenav-link-text" @fadeInOut *ngIf="collapsed">Employés</span>
+      </a>
+    </li>
+    <li class="sidenav-nav-item">
+      <a class="sidenav-nav-link" [routerLink]="['/employe/pointage']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        <i class="sidenav-link-icon fa-regular fa-calendar-check"></i>
+        <span class="sidenav-link-text" @fadeInOut *ngIf="collapsed">Pointage</span>
+      </a>
+    </li>
+    <li class="sidenav-nav-item">
+      <a class="sidenav-nav-link" [routerLink]="['/chat']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        <i class="sidenav-link-icon fa-brands fa-rocketchat"></i>
+        <span class="sidenav-link-text" @fadeInOut *ngIf="collapsed">Chat</span>
+      </a>
+    </li>
+    <li class="sidenav-nav-item">
+      <a class="sidenav-nav-link" [routerLink]="['/chat/file']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        <i class="sidenav-link-icon fa-regular fa-file"></i>
+        <span class="sidenav-link-text" @fadeInOut *ngIf="collapsed">CVs</span>
+      </a>
+    </li>
+
+
+  </ul>
+</ng-template>
+
+<ng-container *ngTemplateOutlet="navData; context: {collapsed: collapsed}"></ng-container>
+</div>

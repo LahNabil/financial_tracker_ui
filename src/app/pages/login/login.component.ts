@@ -32,7 +32,7 @@ export class LoginComponent {
     this.authService.authenticate({ body: this.authRequest }).subscribe({
       next: (res) => {
         if(res.token){
-          this.tokenService.setToken(res.token);
+          this.tokenService.token = res.token as string;
           this.router.navigate(['']);
         }
       },
