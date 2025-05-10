@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MainComponent } from './pages/main/main.component';
 import { BudgetListComponent } from './pages/budget-list/budget-list.component';
+import { ManageBudgetComponent } from './pages/manage-budget/manage-budget.component';
 
 const routes: Routes = [
   {
@@ -11,6 +12,14 @@ const routes: Routes = [
       {
         path: 'budgets',
         component: BudgetListComponent
+      },
+      {
+        path: 'manage',
+        component: ManageBudgetComponent
+      },
+      {
+        path: 'manage/:id',
+        component: ManageBudgetComponent
       }
     ]
   }

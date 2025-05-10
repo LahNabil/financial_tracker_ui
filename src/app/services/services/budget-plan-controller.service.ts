@@ -139,7 +139,7 @@ export class BudgetPlanControllerService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  deleteBudgetPlan$Response(params?: DeleteBudgetPlan$Params, context?: HttpContext): Observable<StrictHttpResponse<boolean>> {
+  deleteBudgetPlan$Response(params: DeleteBudgetPlan$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
     return deleteBudgetPlan(this.http, this.rootUrl, params, context);
   }
 
@@ -149,9 +149,9 @@ export class BudgetPlanControllerService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  deleteBudgetPlan(params?: DeleteBudgetPlan$Params, context?: HttpContext): Observable<boolean> {
+  deleteBudgetPlan(params: DeleteBudgetPlan$Params, context?: HttpContext): Observable<void> {
     return this.deleteBudgetPlan$Response(params, context).pipe(
-      map((r: StrictHttpResponse<boolean>): boolean => r.body)
+      map((r: StrictHttpResponse<void>): void => r.body)
     );
   }
 

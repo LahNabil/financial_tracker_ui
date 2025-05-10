@@ -6,6 +6,9 @@ import { MainComponent } from './pages/main/main.component';
 import { HeaderComponent } from './components/header/header.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { BudgetListComponent } from './pages/budget-list/budget-list.component';
+import { BudgetCardComponent } from './components/budget-card/budget-card.component';
+import { ManageBudgetComponent } from './pages/manage-budget/manage-budget.component';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -15,10 +18,13 @@ import { BudgetListComponent } from './pages/budget-list/budget-list.component';
     HeaderComponent,
     SidebarComponent,
     BudgetListComponent,
+    BudgetCardComponent,
+    ManageBudgetComponent,
   ],
   imports: [
     CommonModule,
     BudgetRoutingModule,
+    FormsModule
   ],
 })
 export class BudgetModule { }

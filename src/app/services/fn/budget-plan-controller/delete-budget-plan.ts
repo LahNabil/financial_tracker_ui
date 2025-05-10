@@ -10,21 +10,23 @@ import { RequestBuilder } from '../../request-builder';
 
 
 export interface DeleteBudgetPlan$Params {
+  id: string;
 }
 
-export function deleteBudgetPlan(http: HttpClient, rootUrl: string, params?: DeleteBudgetPlan$Params, context?: HttpContext): Observable<StrictHttpResponse<boolean>> {
+export function deleteBudgetPlan(http: HttpClient, rootUrl: string, params: DeleteBudgetPlan$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
   const rb = new RequestBuilder(rootUrl, deleteBudgetPlan.PATH, 'delete');
   if (params) {
+    rb.path('id', params.id, {});
   }
 
   return http.request(
-    rb.build({ responseType: 'json', accept: 'application/json', context })
+    rb.build({ responseType: 'text', accept: '*/*', context })
   ).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
-      return (r as HttpResponse<any>).clone({ body: String((r as HttpResponse<any>).body) === 'true' }) as StrictHttpResponse<boolean>;
+      return (r as HttpResponse<any>).clone({ body: undefined }) as StrictHttpResponse<void>;
     })
   );
 }
 
-deleteBudgetPlan.PATH = '/api/v1/budget/id';
+deleteBudgetPlan.PATH = '/api/v1/budget/{id}';

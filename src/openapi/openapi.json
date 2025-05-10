@@ -382,20 +382,29 @@
                     "budget-plan-controller"
                 ],
                 "operationId": "deleteBudgetPlan",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }    
+                ],
                 "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "boolean"
-                                }
-                            }
+                    "204": {
+                        "description": "No Content"
+                        },
+                    "404": {
+                        "description": "Not Found"
+                        },
+                    "403": {
+                        "description": "Forbidden"
                         }
                     }
                 }
-            }
         }
     },
     "components": {

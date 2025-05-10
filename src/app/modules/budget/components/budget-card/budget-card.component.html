@@ -1,0 +1,41 @@
+<div class="container py-3" style="font-family: 'Inter', sans-serif;">
+  <div
+    class="card shadow-sm border-0 rounded-4 hover-shadow transition-all"
+    style="width: 100%; max-width: 20rem;"
+  >
+    <img height="270" src="assets/bg-card.webp" class="card-img-top rounded-top-4" alt="Budget Card Image" />
+
+    <div class="card-body">
+      <h3 class="card-title fs-6 fw-semibold text-nowrap text-truncate mb-2">
+        <i class="fa-solid fa-sack-dollar me-2 text-success"></i>{{ budget.initialIncome }} DH
+      </h3>
+      <h4 class="card-title fs-6 fw-semibold text-nowrap text-truncate mb-0">
+        <i class="fa-solid fa-calendar-days me-2 text-primary"></i>Date: {{ budget.month }}/{{ budget.year }}
+      </h4>
+    </div>
+
+    <div class="card-footer bg-white border-top-0 d-flex justify-content-end gap-3 px-3 py-2">
+      <i
+        class="fas fa-edit text-success cursor-pointer"
+        role="button"
+        data-bs-toggle="tooltip"
+        title="Edit"
+        (click)="onEdit()"
+      ></i>
+      <i
+        class="fa-solid fa-circle-info text-dark cursor-pointer"
+        role="button"
+        data-bs-toggle="tooltip"
+        title="Details"
+        (click)="onDetails()"
+      ></i>
+      <i
+        class="fa-solid fa-box-archive text-muted cursor-pointer"
+        role="button"
+        data-bs-toggle="tooltip"
+        title="Delete"
+        (click)="onDelete()"
+      ></i>
+    </div>
+  </div>
+</div>

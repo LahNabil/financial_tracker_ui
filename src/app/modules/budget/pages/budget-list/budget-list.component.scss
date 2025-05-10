@@ -1,0 +1,18 @@
+.card-item {
+  flex-grow: 1;              /* Ensure cards expand to fill available space */
+  min-width: 200px;          /* Prevent cards from shrinking too much */
+  max-width: 300px;          /* Limit maximum width of each card */
+  margin: 4px;               /* Add a small margin between each card */
+}
+
+/* Optional: reduce the gap even more for smaller screens */
+@media (max-width: 768px) {
+  .card-item {
+    min-width: 150px;       /* Adjust the minimum width for smaller screens */
+    margin: 2px;            /* Reduce margin between cards */
+  }
+}
+.card-container {
+  padding-left: 5%;
+  padding-right: 10%;
+}

@@ -1,4 +1,21 @@
+/* Ensure the HTML and body fill the full height */
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+/* The parent layout container */
 .layout {
   display: flex;
-  min-height: 100vh; /* Full viewport height */
+  height: 100%;
+  width: 100%;
 }
+
+
+/* Main content area */
+.main-content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1; /* This will allow the main content to take the remaining space */ /* Optional padding */
+}
+

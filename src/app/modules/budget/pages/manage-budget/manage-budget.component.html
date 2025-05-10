@@ -1,0 +1,66 @@
+<div class="container p-4">
+  <h2 class="text-center mb-4 font-weight-bold" style="color: #78bdb9;">Manage Budget Plan</h2>
+  <hr class="my-3" style="border-color: #78bdb9;">
+
+  <div class="alert alert-danger mt-2" role="alert" *ngIf="errorMsg.length">
+    <p class="p-0 m-0" *ngFor="let msg of errorMsg">{{ msg }}</p>
+  </div>
+
+  <div class="card shadow-sm p-4 rounded-lg">
+    <form class="row g-3" (ngSubmit)="saveBudget()">
+      <div class="col-md-4">
+        <label for="initialIncome" class="form-label" style="color: #78bdb9;">Initial Income</label>
+        <input
+          [(ngModel)]="budgetResponse.initialIncome"
+          name="initialIncome"
+          type="text"
+          class="form-control shadow-sm"
+          id="initialIncome"
+          placeholder="Enter initial income"
+          style="border-color: #78bdb9;"
+        />
+      </div>
+
+      <div class="col-md-4">
+        <label for="month" class="form-label" style="color: #78bdb9;">Month</label>
+        <input
+          [(ngModel)]="budgetResponse.month"
+          name="month"
+          type="text"
+          class="form-control shadow-sm"
+          id="month"
+          placeholder="Enter month"
+          style="border-color: #78bdb9;"
+          [readonly]="isEditMode"
+        />
+      </div>
+
+      <div class="col-md-4">
+        <label for="year" class="form-label" style="color: #78bdb9;">Year</label>
+        <input
+          [(ngModel)]="budgetResponse.year"
+          name="year"
+          type="text"
+          class="form-control shadow-sm"
+          id="year"
+          placeholder="Enter year"
+          style="border-color: #78bdb9;"
+          [readonly]="isEditMode"
+        />
+      </div>
+
+      <div class="col-12 mt-4 text-center">
+        <button
+          type="submit"
+          class="btn btn-primary btn-lg px-4 py-2 rounded-pill shadow-sm"
+          style="background-color: #78bdb9; border-color: #78bdb9; color: white;"
+        >
+          <i class="fas fa-save"></i>&nbsp; Save
+        </button>
+        <a routerLink="/budgets" class="btn btn-link text-danger btn-lg px-4 py-2 mx-2">
+          <i class="fas fa-times"></i>&nbsp; Cancel
+        </a>
+      </div>
+    </form>
+  </div>
+</div>
