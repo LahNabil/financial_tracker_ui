@@ -131,7 +131,7 @@ export class BudgetPlanControllerService extends BaseService {
   }
 
   /** Path part for operation `deleteBudgetPlan()` */
-  static readonly DeleteBudgetPlanPath = '/api/v1/budget/id';
+  static readonly DeleteBudgetPlanPath = '/api/v1/budget/{id}';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
@@ -139,7 +139,10 @@ export class BudgetPlanControllerService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  deleteBudgetPlan$Response(params: DeleteBudgetPlan$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
+  deleteBudgetPlan$Response(params?: DeleteBudgetPlan$Params | undefined, context?: HttpContext): Observable<StrictHttpResponse<void>> {
+    if (!params) {
+    throw new Error('Params are required');  // Or handle as needed
+  }
     return deleteBudgetPlan(this.http, this.rootUrl, params, context);
   }
 
@@ -149,10 +152,10 @@ export class BudgetPlanControllerService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  deleteBudgetPlan(params: DeleteBudgetPlan$Params, context?: HttpContext): Observable<void> {
-    return this.deleteBudgetPlan$Response(params, context).pipe(
-      map((r: StrictHttpResponse<void>): void => r.body)
-    );
-  }
+  deleteBudgetPlan(params?: DeleteBudgetPlan$Params, context?: HttpContext): Observable<void> {
+  return this.deleteBudgetPlan$Response(params, context).pipe(
+    map(() => {}),  // No body is returned in the response
+  );
+}
 
 }
