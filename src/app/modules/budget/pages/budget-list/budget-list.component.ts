@@ -59,8 +59,8 @@ export class BudgetListComponent implements OnInit {
   }
 }
 
-  detailsBudgetPlan(budget: Event) {
-    throw new Error('Method not implemented.');
+  detailsBudgetPlan(budget: BudgetPlanDto) {
+    this.router.navigate(['budgets','transactions',budget.id])
   }
   editBudgetPlan(budget: BudgetPlanDto) {
   if (budget.id) {

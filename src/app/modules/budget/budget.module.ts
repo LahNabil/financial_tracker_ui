@@ -9,6 +9,7 @@ import { BudgetListComponent } from './pages/budget-list/budget-list.component';
 import { BudgetCardComponent } from './components/budget-card/budget-card.component';
 import { ManageBudgetComponent } from './pages/manage-budget/manage-budget.component';
 import { FormsModule } from '@angular/forms';
+import { BudgetTransactionListComponent } from './pages/budget-transaction-list/budget-transaction-list.component';
 
 
 
@@ -20,11 +21,12 @@ import { FormsModule } from '@angular/forms';
     BudgetListComponent,
     BudgetCardComponent,
     ManageBudgetComponent,
+    BudgetTransactionListComponent,
   ],
   imports: [
     CommonModule,
     BudgetRoutingModule,
-    FormsModule
+    FormsModule,
   ],
 })
 export class BudgetModule { }

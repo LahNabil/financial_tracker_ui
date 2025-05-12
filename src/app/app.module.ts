@@ -19,7 +19,7 @@ import { httpTokenInterceptor } from './services/interceptor/http-token.intercep
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [
     HttpClient,
