@@ -4,12 +4,13 @@
 
 export interface TransactionDto {
   id?: string;
-  amount: number;
+  amount?: number;
   budgetPlanId?: string;
-  category: 'INCOME' | 'BONUS' | 'RENT_MORTGAGE' | 'UTILITIES' | 'GROCERIES' | 'TRANSPORT' | 'INSURANCE' | 'HEALTH' | 'DINING_OUT' | 'ENTERTAINMENT' | 'SHOPPING' | 'TRAVEL' | 'SAVINGS' | 'INVESTMENTS' | 'DEBT' | 'GIFTS' | 'OTHER';
+  category?: 'INCOME' | 'BONUS' | 'RENT_MORTGAGE' | 'UTILITIES' | 'GROCERIES' | 'TRANSPORT' | 'INSURANCE' | 'HEALTH' | 'DINING_OUT' | 'ENTERTAINMENT' | 'SHOPPING' | 'TRAVEL' | 'SAVINGS' | 'INVESTMENTS' | 'DEBT' | 'GIFTS' | 'OTHER';
   date?: string;
   description?: string;
-  status: 'REAL' | 'EXPECTED';
-  title: string;
-  type: 'INCOME' | 'EXPANSE';
+  status?: 'REAL' | 'EXPECTED';
+  title?: string;
+  type?: 'INCOME' | 'EXPANSE';
+
 }

@@ -4,6 +4,7 @@ import { MainComponent } from './pages/main/main.component';
 import { BudgetListComponent } from './pages/budget-list/budget-list.component';
 import { ManageBudgetComponent } from './pages/manage-budget/manage-budget.component';
 import { BudgetTransactionListComponent } from './pages/budget-transaction-list/budget-transaction-list.component';
+import { ManageTransactionComponent } from './pages/manage-transaction/manage-transaction.component';
 
 const routes: Routes = [
   {
@@ -25,6 +26,14 @@ const routes: Routes = [
       {
         path: 'budgets/transactions/:budgetId',
         component: BudgetTransactionListComponent
+      },
+      {
+        path: 'budgets/add/transaction/:budgetPlanId',
+        component: ManageTransactionComponent
+      },
+      {
+        path: 'budgets/manage/transaction/:id',
+        component: ManageTransactionComponent
       }
     ]
   }

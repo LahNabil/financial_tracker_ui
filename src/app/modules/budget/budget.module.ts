@@ -10,6 +10,7 @@ import { BudgetCardComponent } from './components/budget-card/budget-card.compon
 import { ManageBudgetComponent } from './pages/manage-budget/manage-budget.component';
 import { FormsModule } from '@angular/forms';
 import { BudgetTransactionListComponent } from './pages/budget-transaction-list/budget-transaction-list.component';
+import { ManageTransactionComponent } from './pages/manage-transaction/manage-transaction.component';
 
 
 
@@ -22,6 +23,7 @@ import { BudgetTransactionListComponent } from './pages/budget-transaction-list/
     BudgetCardComponent,
     ManageBudgetComponent,
     BudgetTransactionListComponent,
+    ManageTransactionComponent,
   ],
   imports: [
     CommonModule,

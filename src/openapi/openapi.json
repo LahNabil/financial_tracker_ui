@@ -31,6 +31,35 @@
     ],
     "paths": {
         "/api/v1/transaction/{id}": {
+            "get": {
+                "tags": [
+                    "transaction-controller"
+                ],
+                "operationId": "getTransactionById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TransactionDto"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
             "put": {
                 "tags": [
                     "transaction-controller"
@@ -163,12 +192,23 @@
                 }
             }
         },
-        "/api/v1/transaction/": {
+        "/api/v1/transaction/{budgetPlanId}": {
             "post": {
                 "tags": [
                     "transaction-controller"
                 ],
                 "operationId": "saveTransaction",
+                "parameters": [
+                    {
+                        "name": "budgetPlanId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
                 "requestBody": {
                     "content": {
                         "application/json": {

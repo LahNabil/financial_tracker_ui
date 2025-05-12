@@ -15,6 +15,8 @@ import { deleteTransaction } from '../fn/transaction-controller/delete-transacti
 import { DeleteTransaction$Params } from '../fn/transaction-controller/delete-transaction';
 import { findAllTransactionsByBudget } from '../fn/transaction-controller/find-all-transactions-by-budget';
 import { FindAllTransactionsByBudget$Params } from '../fn/transaction-controller/find-all-transactions-by-budget';
+import { getTransactionById } from '../fn/transaction-controller/get-transaction-by-id';
+import { GetTransactionById$Params } from '../fn/transaction-controller/get-transaction-by-id';
 import { PageResponseTransactionDto } from '../models/page-response-transaction-dto';
 import { saveTransaction } from '../fn/transaction-controller/save-transaction';
 import { SaveTransaction$Params } from '../fn/transaction-controller/save-transaction';
@@ -26,6 +28,31 @@ import { UpdateTransaction$Params } from '../fn/transaction-controller/update-tr
 export class TransactionControllerService extends BaseService {
   constructor(config: ApiConfiguration, http: HttpClient) {
     super(config, http);
+  }
+
+  /** Path part for operation `getTransactionById()` */
+  static readonly GetTransactionByIdPath = '/api/v1/transaction/{id}';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `getTransactionById()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getTransactionById$Response(params: GetTransactionById$Params, context?: HttpContext): Observable<StrictHttpResponse<TransactionDto>> {
+    return getTransactionById(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `getTransactionById$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getTransactionById(params: GetTransactionById$Params, context?: HttpContext): Observable<TransactionDto> {
+    return this.getTransactionById$Response(params, context).pipe(
+      map((r: StrictHttpResponse<TransactionDto>): TransactionDto => r.body)
+    );
   }
 
   /** Path part for operation `updateTransaction()` */
@@ -79,7 +106,7 @@ export class TransactionControllerService extends BaseService {
   }
 
   /** Path part for operation `saveTransaction()` */
-  static readonly SaveTransactionPath = '/api/v1/transaction/';
+  static readonly SaveTransactionPath = '/api/v1/transaction/{budgetPlanId}';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.

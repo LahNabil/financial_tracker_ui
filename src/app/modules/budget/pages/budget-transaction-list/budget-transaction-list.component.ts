@@ -14,7 +14,7 @@ export class BudgetTransactionListComponent implements OnInit {
 
   transactionResponse: PageResponseTransactionDto = {};
     page=0;
-    size=5;
+    size=6;
     pages: any = [];
     message = '';
     budgetId!: string;

@@ -11,12 +11,14 @@ import { RequestBuilder } from '../../request-builder';
 import { TransactionDto } from '../../models/transaction-dto';
 
 export interface SaveTransaction$Params {
+  budgetPlanId: string;
       body: TransactionDto
 }
 
 export function saveTransaction(http: HttpClient, rootUrl: string, params: SaveTransaction$Params, context?: HttpContext): Observable<StrictHttpResponse<string>> {
   const rb = new RequestBuilder(rootUrl, saveTransaction.PATH, 'post');
   if (params) {
+    rb.path('budgetPlanId', params.budgetPlanId, {});
     rb.body(params.body, 'application/json');
   }
 
@@ -30,4 +32,4 @@ export function saveTransaction(http: HttpClient, rootUrl: string, params: SaveT
   );
 }
 
-saveTransaction.PATH = '/api/v1/transaction/';
+saveTransaction.PATH = '/api/v1/transaction/{budgetPlanId}';

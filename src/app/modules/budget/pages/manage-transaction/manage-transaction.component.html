@@ -1,0 +1,182 @@
+<div class="container p-4">
+  <h2 class="text-center mb-4 font-weight-bold" style="color: #78bdb9;">Manage Transaction</h2>
+  <hr class="my-3" style="border-color: #78bdb9;">
+
+  <div class="alert alert-danger mt-2" role="alert" *ngIf="errorMsg.length">
+    <p class="p-0 m-0" *ngFor="let msg of errorMsg">{{ msg }}</p>
+  </div>
+
+  <div class="card shadow-sm p-4 rounded-lg">
+    <form class="row g-3" (ngSubmit)="saveTransaction()">
+      <!-- Title Input -->
+      <div class="col-md-4">
+        <label for="title" class="form-label" style="color: #78bdb9;">Title</label>
+        <input
+          [(ngModel)]="transactionResponse.title"
+          name="title"
+          type="text"
+          class="form-control shadow-sm"
+          id="title"
+          placeholder="Enter title"
+          style="border-color: #78bdb9;"
+        />
+      </div>
+
+      <!-- Amount Input -->
+      <div class="col-md-4">
+        <label for="amount" class="form-label" style="color: #78bdb9;">Amount</label>
+        <input
+          [(ngModel)]="transactionResponse.amount"
+          name="amount"
+          type="number"
+          class="form-control shadow-sm"
+          id="amount"
+          placeholder="Enter amount"
+          style="border-color: #78bdb9;"
+        />
+      </div>
+
+      <!-- Date Input -->
+      <div class="col-md-4">
+        <label for="date" class="form-label" style="color: #78bdb9;">Date</label>
+        <input
+          [(ngModel)]="transactionResponse.date"
+          name="date"
+          type="date"
+          class="form-control shadow-sm"
+          id="date"
+          style="border-color: #78bdb9;"
+        />
+      </div>
+
+      <!-- Status Radio Buttons -->
+      <div class="col-md-4">
+        <label for="status" class="form-label" style="color: #78bdb9;">Status</label>
+        <div>
+          <div class="form-check form-check-inline">
+            <input
+              [(ngModel)]="transactionResponse.status"
+              name="status"
+              type="radio"
+              id="real"
+              value="REAL"
+              class="form-check-input"
+            />
+            <label class="form-check-label" for="real" style="color: #78bdb9;">REAL</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input
+              [(ngModel)]="transactionResponse.status"
+              name="status"
+              type="radio"
+              id="expected"
+              value="EXPECTED"
+              class="form-check-input"
+            />
+            <label class="form-check-label" for="expected" style="color: #78bdb9;">EXPECTED</label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Category Select Dropdown -->
+      <div class="col-md-4">
+        <label for="category" class="form-label" style="color: #78bdb9;">Category</label>
+        <select
+          [(ngModel)]="transactionResponse.category"
+          name="category"
+          class="form-select shadow-sm"
+          id="category"
+          style="border-color: #78bdb9;"
+        >
+          <option value="RENT_MORTGAGE">RENT_MORTGAGE</option>
+          <option value="UTILITIES">UTILITIES</option>
+          <option value="GROCERIES">GROCERIES</option>
+          <option value="TRANSPORT">TRANSPORT</option>
+          <option value="INSURANCE">INSURANCE</option>
+          <option value="HEALTH">HEALTH</option>
+          <option value="DINING_OUT">DINING_OUT</option>
+          <option value="ENTERTAINMENT">ENTERTAINMENT</option>
+          <option value="SHOPPING">SHOPPING</option>
+          <option value="TRAVEL">TRAVEL</option>
+          <option value="SAVINGS">SAVINGS</option>
+          <option value="INVESTMENTS">INVESTMENTS</option>
+          <option value="DEBT">DEBT</option>
+          <option value="GIFTS">GIFTS</option>
+          <option value="OTHER">OTHER</option>
+        </select>
+      </div>
+
+      <!-- Type Radio Buttons -->
+      <div class="col-md-4">
+        <label for="type" class="form-label" style="color: #78bdb9;">Type</label>
+        <div>
+          <div class="form-check form-check-inline">
+            <input
+              [(ngModel)]="transactionResponse.type"
+              name="type"
+              type="radio"
+              id="income"
+              value="INCOME"
+              class="form-check-input"
+            />
+            <label class="form-check-label" for="income" style="color: #78bdb9;">INCOME</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input
+              [(ngModel)]="transactionResponse.type"
+              name="type"
+              type="radio"
+              id="expense"
+              value="EXPENSE"
+              class="form-check-input"
+            />
+            <label class="form-check-label" for="expense" style="color: #78bdb9;">EXPENSE</label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Description Input -->
+      <div class="col-md-4">
+        <label for="description" class="form-label" style="color: #78bdb9;">Description</label>
+        <input
+          [(ngModel)]="transactionResponse.description"
+          name="description"
+          type="text"
+          class="form-control shadow-sm"
+          id="description"
+          placeholder="Enter description"
+          style="border-color: #78bdb9;"
+        />
+      </div>
+
+      <!-- Budget Plan ID Input -->
+      <div class="col-md-4">
+        <label for="budgetPlanId" class="form-label" style="color: #78bdb9;">Budget Plan Id</label>
+        <input
+          [(ngModel)]="transactionResponse.budgetPlanId"
+          name="budgetPlanId"
+          type="text"
+          class="form-control shadow-sm"
+          id="budgetPlanId"
+          placeholder="Enter budget plan id"
+          style="border-color: #78bdb9;"
+          [readonly]="true"
+        />
+      </div>
+
+      <!-- Submit Button -->
+      <div class="col-12 mt-4 text-center">
+        <button
+          type="submit"
+          class="btn btn-primary btn-lg px-4 py-2 rounded-pill shadow-sm"
+          style="background-color: #78bdb9; border-color: #78bdb9; color: white;"
+        >
+          <i class="fas fa-save"></i>&nbsp; Save
+        </button>
+        <a routerLink="/budgets" class="btn btn-link text-danger btn-lg px-4 py-2 mx-2">
+          <i class="fas fa-times"></i>&nbsp; Cancel
+        </a>
+      </div>
+    </form>
+  </div>
+</div>
