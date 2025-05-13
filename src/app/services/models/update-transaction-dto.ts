@@ -10,6 +10,6 @@ export interface UpdateTransactionDto {
   description?: string;
   status: 'REAL' | 'EXPECTED';
   title: string;
-  type: 'INCOME' | 'EXPANSE';
+  type: 'INCOME' | 'EXPENSE';
   budgetPlanId?: string;
 }
