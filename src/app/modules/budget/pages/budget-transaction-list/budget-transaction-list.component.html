@@ -1,12 +1,35 @@
 <div class="transaction-list container-fluid py-4 px-3">
   <!-- Header -->
   <div class="d-flex justify-content-between align-items-center mb-4">
-    <h3 style="color: #78bdb9; font-weight: bold;">Transactions</h3>
-     <a [routerLink]="['/budgets/add/transaction', budgetId]" class="btn btn-primary shadow-sm">
+    <h3 style="color: #78bdb9; font-weight: bold;">
+      Transactions Of Your Budget Plan with 
+      {{ budget.initialIncome }} MAD – {{ budget.month }}/{{ budget.year }}
+    </h3>
+    <a [routerLink]="['/budgets/add/transaction', budgetId]" class="btn btn-primary shadow-sm">
       <i class="fas fa-plus me-2"></i> Add Transaction
     </a>
   </div>
 
+  <div class="row mb-3">
+    <div class="col-md-4">
+      <div class="alert alert-success shadow-sm d-flex justify-content-between align-items-center">
+        <strong>Total Incomes:</strong>
+        <span>{{ totalIncome | number: '1.2-2' }} MAD</span>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="alert alert-danger shadow-sm d-flex justify-content-between align-items-center">
+        <strong>Total Expenses:</strong>
+        <span>{{ totalExpense | number: '1.2-2' }} MAD</span>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="alert alert-info shadow-sm d-flex justify-content-between align-items-center">
+        <strong>Remaining Budget:</strong>
+        <span>{{ remainingBudget | number: '1.2-2' }} MAD</span>
+      </div>
+    </div>
+  </div>
   <!-- Table Card -->
   <div class="card shadow-sm border-0 rounded-3">
     <div class="card-body p-0">

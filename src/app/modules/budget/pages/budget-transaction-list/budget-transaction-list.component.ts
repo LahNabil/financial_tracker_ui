@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { PageResponseTransactionDto, TransactionDto, UpdateTransactionDto } from '../../../../services/models';
-import { TransactionControllerService } from '../../../../services/services';
+import { BudgetPlanDto, PageResponseTransactionDto, TransactionDto, UpdateTransactionDto } from '../../../../services/models';
+import { BudgetPlanControllerService, TransactionControllerService } from '../../../../services/services';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -20,16 +20,70 @@ export class BudgetTransactionListComponent implements OnInit {
     message = '';
     budgetId!: string;
     isLoading = false;
+    budget: BudgetPlanDto = {};
+    totalIncome: number = 0;
+    totalExpense: number = 0;
+    remainingBudget: number = 0;
   
 
-  constructor(private transactionService: TransactionControllerService, private router: Router,private activatedRoute: ActivatedRoute,){}
+  constructor(private budgetPlanService: BudgetPlanControllerService,private transactionService: TransactionControllerService, private router: Router,private activatedRoute: ActivatedRoute,){}
 
   ngOnInit(): void {
     this.budgetId = this.activatedRoute.snapshot.params['budgetId']
     console.log('Budget ID:', this.budgetId);
     this.getAllTransactions();
+    this.getBudgetPlanById();
+    this.getTotalIncomes();  // Make sure this is called
+    this.getTotalExpenses();
+    this.getRemainingBudget();
       
   }
+  private getBudgetPlanById(){
+    this.budgetPlanService.findBudgetPlanById({ id: this.budgetId }).subscribe({
+      next: (res) => {
+      this.budget = res;
+      },
+      error: () => {
+        console.error('Failed to fetch budget info');
+      }
+    });
+  }
+  
+  private getTotalIncomes() {
+  this.transactionService.getTotalIncome({ budgetId: this.budgetId }).subscribe({
+    next: (income) => {
+      this.totalIncome = income;
+      console.log('Total Income:', income);
+    },
+    error: (err) => {
+      console.error('Failed to fetch total income', err);
+    }
+  });
+}
+
+private getTotalExpenses() {
+  this.transactionService.getTotalExpense({ budgetId: this.budgetId }).subscribe({
+    next: (expense) => {
+      this.totalExpense = expense;
+      console.log('Total Expense:', expense);
+    },
+    error: (err) => {
+      console.error('Failed to fetch total expense', err);
+    }
+  });
+}
+
+private getRemainingBudget() {
+  this.transactionService.getRemainingBudget({ budgetId: this.budgetId }).subscribe({
+    next: (remainingBudget) => {
+      this.remainingBudget = remainingBudget;
+      console.log('Remaining Budget:', remainingBudget);
+    },
+    error: (err) => {
+      console.error('Failed to fetch remaining budget', err);
+    }
+  });
+}
   private getAllTransactions(){
     this.transactionService.findAllTransactionsByBudget({
       budgetId: this.budgetId,

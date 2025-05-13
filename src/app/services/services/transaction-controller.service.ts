@@ -15,6 +15,12 @@ import { deleteTransaction } from '../fn/transaction-controller/delete-transacti
 import { DeleteTransaction$Params } from '../fn/transaction-controller/delete-transaction';
 import { findAllTransactionsByBudget } from '../fn/transaction-controller/find-all-transactions-by-budget';
 import { FindAllTransactionsByBudget$Params } from '../fn/transaction-controller/find-all-transactions-by-budget';
+import { getRemainingBudget } from '../fn/transaction-controller/get-remaining-budget';
+import { GetRemainingBudget$Params } from '../fn/transaction-controller/get-remaining-budget';
+import { getTotalExpense } from '../fn/transaction-controller/get-total-expense';
+import { GetTotalExpense$Params } from '../fn/transaction-controller/get-total-expense';
+import { getTotalIncome } from '../fn/transaction-controller/get-total-income';
+import { GetTotalIncome$Params } from '../fn/transaction-controller/get-total-income';
 import { getTransactionById } from '../fn/transaction-controller/get-transaction-by-id';
 import { GetTransactionById$Params } from '../fn/transaction-controller/get-transaction-by-id';
 import { PageResponseTransactionDto } from '../models/page-response-transaction-dto';
@@ -127,6 +133,81 @@ export class TransactionControllerService extends BaseService {
   saveTransaction(params: SaveTransaction$Params, context?: HttpContext): Observable<string> {
     return this.saveTransaction$Response(params, context).pipe(
       map((r: StrictHttpResponse<string>): string => r.body)
+    );
+  }
+
+  /** Path part for operation `getTotalIncome()` */
+  static readonly GetTotalIncomePath = '/api/v1/transaction/total-income/{budgetId}';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `getTotalIncome()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getTotalIncome$Response(params: GetTotalIncome$Params, context?: HttpContext): Observable<StrictHttpResponse<number>> {
+    return getTotalIncome(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `getTotalIncome$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getTotalIncome(params: GetTotalIncome$Params, context?: HttpContext): Observable<number> {
+    return this.getTotalIncome$Response(params, context).pipe(
+      map((r: StrictHttpResponse<number>): number => r.body)
+    );
+  }
+
+  /** Path part for operation `getTotalExpense()` */
+  static readonly GetTotalExpensePath = '/api/v1/transaction/total-expense/{budgetId}';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `getTotalExpense()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getTotalExpense$Response(params: GetTotalExpense$Params, context?: HttpContext): Observable<StrictHttpResponse<number>> {
+    return getTotalExpense(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `getTotalExpense$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getTotalExpense(params: GetTotalExpense$Params, context?: HttpContext): Observable<number> {
+    return this.getTotalExpense$Response(params, context).pipe(
+      map((r: StrictHttpResponse<number>): number => r.body)
+    );
+  }
+
+  /** Path part for operation `getRemainingBudget()` */
+  static readonly GetRemainingBudgetPath = '/api/v1/transaction/remaining-budget/{budgetId}';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `getRemainingBudget()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getRemainingBudget$Response(params: GetRemainingBudget$Params, context?: HttpContext): Observable<StrictHttpResponse<number>> {
+    return getRemainingBudget(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `getRemainingBudget$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getRemainingBudget(params: GetRemainingBudget$Params, context?: HttpContext): Observable<number> {
+    return this.getRemainingBudget$Response(params, context).pipe(
+      map((r: StrictHttpResponse<number>): number => r.body)
     );
   }
 

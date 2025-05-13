@@ -12,5 +12,4 @@ export interface TransactionDto {
   status?: 'REAL' | 'EXPECTED';
   title?: string;
   type?: 'INCOME' | 'EXPENSE';
-
 }

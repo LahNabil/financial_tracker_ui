@@ -365,6 +365,99 @@
                 }
             }
         },
+        "/api/v1/transaction/total-income/{budgetId}": {
+            "get": {
+                "tags": [
+                    "transaction-controller"
+                ],
+                "operationId": "getTotalIncome",
+                "parameters": [
+                    {
+                        "name": "budgetId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "number"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/transaction/total-expense/{budgetId}": {
+        "get": {
+            "tags": [
+            "transaction-controller"
+            ],
+            "operationId": "getTotalExpense",
+            "parameters": [
+                {
+                    "name": "budgetId",
+                    "in": "path",
+                    "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "OK",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "number"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "/api/v1/transaction/remaining-budget/{budgetId}": {
+      "get": {
+        "tags": [
+          "transaction-controller"
+        ],
+        "operationId": "getRemainingBudget",
+            "parameters": [
+                {
+                "name": "budgetId",
+                "in": "path",
+                "required": true,
+                    "schema": {
+                        "type": "string",
+                        "format": "uuid"
+                    }
+                }
+            ],
+            "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "number"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/v1/transaction/budget/{budgetId}": {
             "get": {
                 "tags": [
