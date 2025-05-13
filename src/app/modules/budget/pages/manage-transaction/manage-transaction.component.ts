@@ -4,6 +4,7 @@ import { TransactionControllerService } from '../../../../services/services';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SaveTransaction$Params } from '../../../../services/fn/transaction-controller/save-transaction';
 import { UpdateTransaction$Params } from '../../../../services/fn/transaction-controller/update-transaction';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-manage-transaction',
@@ -12,15 +13,18 @@ import { UpdateTransaction$Params } from '../../../../services/fn/transaction-co
   styleUrl: './manage-transaction.component.scss'
 })
 export class ManageTransactionComponent implements OnInit {
+
   errorMsg: string[] = [];
   transactionResponse: TransactionDto = {};
   budgetPlanId: string | null = null;
   isEditMode = false;
+  
 
   constructor(
     private transactionService: TransactionControllerService,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private location: Location
   ) {}
 
   ngOnInit(): void {
@@ -88,7 +92,7 @@ export class ManageTransactionComponent implements OnInit {
       this.transactionService.updateTransaction(params).subscribe({
         next: (res) => {
           console.log('Transaction updated successfully', res);
-          this.router.navigate(['/budgets']);
+          this.goBack();
         },
         error: (err) => {
           console.error('Update error:', err);
@@ -105,7 +109,7 @@ export class ManageTransactionComponent implements OnInit {
       this.transactionService.saveTransaction(params).subscribe({
         next: (res) => {
           console.log('Transaction added successfully', res);
-          this.router.navigate(['/budgets']);
+          this.goBack();
         },
         error: (err) => {
           console.error('Save error:', err);
@@ -113,5 +117,8 @@ export class ManageTransactionComponent implements OnInit {
         }
       });
     }
+  }
+  goBack() {
+    this.location.back();
   }
 }

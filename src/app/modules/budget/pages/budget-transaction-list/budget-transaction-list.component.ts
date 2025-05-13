@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PageResponseTransactionDto } from '../../../../services/models';
+import { PageResponseTransactionDto, TransactionDto, UpdateTransactionDto } from '../../../../services/models';
 import { TransactionControllerService } from '../../../../services/services';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -12,6 +12,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class BudgetTransactionListComponent implements OnInit {
 
 
+  transaction: TransactionDto = {};
   transactionResponse: PageResponseTransactionDto = {};
     page=0;
     size=6;
@@ -65,8 +66,13 @@ export class BudgetTransactionListComponent implements OnInit {
     }
   }
 
-  onEdit(arg0: string|undefined) {
-    throw new Error('Method not implemented.');
+  onEdit(transaction: TransactionDto) {
+    if (transaction.id) {
+    this.router.navigate(['budgets','manage','transaction', transaction.id]);  // This will trigger /manage/:id
+  } else {
+    console.error('Invalid budget object or missing budget ID');
+  }
+    
   }
 
   goToFirstPage() {
