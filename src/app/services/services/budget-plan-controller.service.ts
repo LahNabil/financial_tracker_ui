@@ -11,6 +11,7 @@ import { BaseService } from '../base-service';
 import { ApiConfiguration } from '../api-configuration';
 import { StrictHttpResponse } from '../strict-http-response';
 
+import { BudgetChartDataDto } from '../models/budget-chart-data-dto';
 import { BudgetPlanDto } from '../models/budget-plan-dto';
 import { deleteBudgetPlan } from '../fn/budget-plan-controller/delete-budget-plan';
 import { DeleteBudgetPlan$Params } from '../fn/budget-plan-controller/delete-budget-plan';
@@ -18,6 +19,8 @@ import { findAllBudgets } from '../fn/budget-plan-controller/find-all-budgets';
 import { FindAllBudgets$Params } from '../fn/budget-plan-controller/find-all-budgets';
 import { findBudgetPlanById } from '../fn/budget-plan-controller/find-budget-plan-by-id';
 import { FindBudgetPlanById$Params } from '../fn/budget-plan-controller/find-budget-plan-by-id';
+import { getCurrentMonthBudgetWithTransactions } from '../fn/budget-plan-controller/get-current-month-budget-with-transactions';
+import { GetCurrentMonthBudgetWithTransactions$Params } from '../fn/budget-plan-controller/get-current-month-budget-with-transactions';
 import { PageResponseBudgetPlanDto } from '../models/page-response-budget-plan-dto';
 import { saveBudgetPlan } from '../fn/budget-plan-controller/save-budget-plan';
 import { SaveBudgetPlan$Params } from '../fn/budget-plan-controller/save-budget-plan';
@@ -80,6 +83,31 @@ export class BudgetPlanControllerService extends BaseService {
     );
   }
 
+  /** Path part for operation `deleteBudgetPlan()` */
+  static readonly DeleteBudgetPlanPath = '/api/v1/budget/{id}';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `deleteBudgetPlan()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  deleteBudgetPlan$Response(params: DeleteBudgetPlan$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
+    return deleteBudgetPlan(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `deleteBudgetPlan$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  deleteBudgetPlan(params: DeleteBudgetPlan$Params, context?: HttpContext): Observable<void> {
+    return this.deleteBudgetPlan$Response(params, context).pipe(
+      map((r: StrictHttpResponse<void>): void => r.body)
+    );
+  }
+
   /** Path part for operation `findAllBudgets()` */
   static readonly FindAllBudgetsPath = '/api/v1/budget/';
 
@@ -130,28 +158,28 @@ export class BudgetPlanControllerService extends BaseService {
     );
   }
 
-  /** Path part for operation `deleteBudgetPlan()` */
-  static readonly DeleteBudgetPlanPath = '/api/v1/budget/id';
+  /** Path part for operation `getCurrentMonthBudgetWithTransactions()` */
+  static readonly GetCurrentMonthBudgetWithTransactionsPath = '/api/v1/budget/current-month/with-transactions';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `deleteBudgetPlan()` instead.
+   * To access only the response body, use `getCurrentMonthBudgetWithTransactions()` instead.
    *
    * This method doesn't expect any request body.
    */
-  deleteBudgetPlan$Response(params: DeleteBudgetPlan$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
-    return deleteBudgetPlan(this.http, this.rootUrl, params, context);
+  getCurrentMonthBudgetWithTransactions$Response(params?: GetCurrentMonthBudgetWithTransactions$Params, context?: HttpContext): Observable<StrictHttpResponse<BudgetChartDataDto>> {
+    return getCurrentMonthBudgetWithTransactions(this.http, this.rootUrl, params, context);
   }
 
   /**
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `deleteBudgetPlan$Response()` instead.
+   * To access the full response (for headers, for example), `getCurrentMonthBudgetWithTransactions$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  deleteBudgetPlan(params: DeleteBudgetPlan$Params, context?: HttpContext): Observable<void> {
-    return this.deleteBudgetPlan$Response(params, context).pipe(
-      map((r: StrictHttpResponse<void>): void => r.body)
+  getCurrentMonthBudgetWithTransactions(params?: GetCurrentMonthBudgetWithTransactions$Params, context?: HttpContext): Observable<BudgetChartDataDto> {
+    return this.getCurrentMonthBudgetWithTransactions$Response(params, context).pipe(
+      map((r: StrictHttpResponse<BudgetChartDataDto>): BudgetChartDataDto => r.body)
     );
   }
 

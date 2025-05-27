@@ -4,6 +4,7 @@
 
 export type { AuthenticationRequest } from './models/authentication-request';
 export type { AuthenticationResponse } from './models/authentication-response';
+export type { BudgetChartDataDto } from './models/budget-chart-data-dto';
 export type { BudgetPlanDto } from './models/budget-plan-dto';
 export type { PageResponseBudgetPlanDto } from './models/page-response-budget-plan-dto';
 export type { PageResponseTransactionDto } from './models/page-response-transaction-dto';

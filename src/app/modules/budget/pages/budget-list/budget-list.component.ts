@@ -64,7 +64,7 @@ export class BudgetListComponent implements OnInit {
   }
   editBudgetPlan(budget: BudgetPlanDto) {
   if (budget.id) {
-    this.router.navigate(['manage', budget.id]);  // This will trigger /manage/:id
+    this.router.navigate(['budgets','manage', budget.id]);  // This will trigger /manage/:id
   } else {
     console.error('Invalid budget object or missing budget ID');
   }

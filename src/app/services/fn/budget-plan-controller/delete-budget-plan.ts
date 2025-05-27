@@ -29,4 +29,4 @@ export function deleteBudgetPlan(http: HttpClient, rootUrl: string, params: Dele
   );
 }
 
-deleteBudgetPlan.PATH = '/api/v1/budget/id';
+deleteBudgetPlan.PATH = '/api/v1/budget/{id}';

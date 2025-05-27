@@ -12,7 +12,7 @@ const routes: Routes = [
     component: MainComponent,
     children: [
       {
-        path: 'budgets',
+        path: '',
         component: BudgetListComponent
       },
       {
@@ -24,15 +24,15 @@ const routes: Routes = [
         component: ManageBudgetComponent
       },
       {
-        path: 'budgets/transactions/:budgetId',
+        path: 'transactions/:budgetId',
         component: BudgetTransactionListComponent
       },
       {
-        path: 'budgets/add/transaction/:budgetPlanId',
+        path: 'add/transaction/:budgetPlanId',
         component: ManageTransactionComponent
       },
       {
-        path: 'budgets/manage/transaction/:id',
+        path: 'manage/transaction/:id',
         component: ManageTransactionComponent
       }
     ]

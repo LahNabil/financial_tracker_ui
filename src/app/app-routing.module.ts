@@ -13,8 +13,13 @@ const routes: Routes = [
     component: RegisterComponent
   },
   {
-    path: '',
+    path: 'budgets',
     loadChildren: ()=> import('./modules/budget/budget.module').then(m=> m.BudgetModule)
+  },
+  {
+    path: '',
+    loadChildren: ()=> import('./modules/dashboard/dashboard.module').then(m=> m.DashboardModule),
+    pathMatch: 'full'
   }
 ];
 

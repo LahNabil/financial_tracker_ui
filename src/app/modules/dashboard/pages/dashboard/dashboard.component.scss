@@ -1,0 +1,10 @@
+.chart-wrapper {
+  display: flex;
+  justify-content: flex-start; // aligns to the left
+  width: 100%; // or limit it if needed
+
+  app-budget-line-chart {
+    width: 50%; // adjust to desired size
+    height: 200px; // adjust height if necessary
+  }
+}

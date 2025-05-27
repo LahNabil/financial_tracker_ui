@@ -1,431 +1,453 @@
 {
-    "openapi": "3.0.1",
-    "info": {
-        "title": "OpenApi specification - Lahlalia",
-        "description": "OpenApi documentation for Financial Track with spring security",
-        "contact": {
-            "name": "Lahlalia",
-            "url": "https://lahlalianb.xyz",
-            "email": "lahlalia.nabil@hotmail.com"
-        },
-        "license": {
-            "name": "Licesne Name",
-            "url": "https://some-url.com"
-        },
-        "version": "1.0"
+  "openapi": "3.0.1",
+  "info": {
+    "title": "OpenApi specification - Lahlalia",
+    "description": "OpenApi documentation for Financial Track with spring security",
+    "contact": {
+      "name": "Lahlalia",
+      "url": "https://lahlalianb.xyz",
+      "email": "lahlalia.nabil@hotmail.com"
     },
-    "servers": [
-        {
-            "url": "http://localhost:8081",
-            "description": "Local ENV"
-        },
-        {
-            "url": "https://lahlalianb.xyz",
-            "description": "Prod ENV"
+    "license": {
+      "name": "Licesne Name",
+      "url": "https://some-url.com"
+    },
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8081",
+      "description": "Local ENV"
+    },
+    {
+      "url": "https://lahlalianb.xyz",
+      "description": "Prod ENV"
+    }
+  ],
+  "security": [
+    {
+      "BearerAuth": []
+    }
+  ],
+  "paths": {
+    "/api/v1/transaction/{id}": {
+      "get": {
+        "tags": [
+          "transaction-controller"
+        ],
+        "operationId": "getTransactionById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransactionDto"
+                }
+              }
+            }
+          }
         }
-    ],
-    "security": [
-        {
-            "BearerAuth": []
+      },
+      "put": {
+        "tags": [
+          "transaction-controller"
+        ],
+        "operationId": "updateTransaction",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateTransactionDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransactionDto"
+                }
+              }
+            }
+          }
         }
-    ],
-    "paths": {
-        "/api/v1/transaction/{id}": {
-            "get": {
-                "tags": [
-                    "transaction-controller"
-                ],
-                "operationId": "getTransactionById",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "format": "uuid"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/TransactionDto"
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "put": {
-                "tags": [
-                    "transaction-controller"
-                ],
-                "operationId": "updateTransaction",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "format": "uuid"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/UpdateTransactionDto"
-                            }
-                        }
-                    },
-                    "required": true
-                },
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/TransactionDto"
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "delete": {
-                "tags": [
-                    "transaction-controller"
-                ],
-                "operationId": "deleteTransaction",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "format": "uuid"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK"
-                    }
-                }
+      },
+      "delete": {
+        "tags": [
+          "transaction-controller"
+        ],
+        "operationId": "deleteTransaction",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
             }
-        },
-        "/api/v1/budget/{id}": {
-            "get": {
-                "tags": [
-                    "budget-plan-controller"
-                ],
-                "operationId": "findBudgetPlanById",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "format": "uuid"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/BudgetPlanDto"
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "put": {
-                "tags": [
-                    "budget-plan-controller"
-                ],
-                "operationId": "updateBudgetPlan",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "format": "uuid"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/BudgetPlanDto"
-                            }
-                        }
-                    },
-                    "required": true
-                },
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/BudgetPlanDto"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/api/v1/transaction/{budgetPlanId}": {
-            "post": {
-                "tags": [
-                    "transaction-controller"
-                ],
-                "operationId": "saveTransaction",
-                "parameters": [
-                    {
-                        "name": "budgetPlanId",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "format": "uuid"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/TransactionDto"
-                            }
-                        }
-                    },
-                    "required": true
-                },
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "string",
-                                    "format": "uuid"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/api/v1/budget/": {
-            "get": {
-                "tags": [
-                    "budget-plan-controller"
-                ],
-                "operationId": "findAllBudgets",
-                "parameters": [
-                    {
-                        "name": "page",
-                        "in": "query",
-                        "required": false,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int32",
-                            "default": 0
-                        }
-                    },
-                    {
-                        "name": "size",
-                        "in": "query",
-                        "required": false,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int32",
-                            "default": 10
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/PageResponseBudgetPlanDto"
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "post": {
-                "tags": [
-                    "budget-plan-controller"
-                ],
-                "operationId": "saveBudgetPlan",
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/BudgetPlanDto"
-                            }
-                        }
-                    },
-                    "required": true
-                },
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "string",
-                                    "format": "uuid"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/api/v1/auth/register": {
-            "post": {
-                "tags": [
-                    "authentication-controller"
-                ],
-                "operationId": "register",
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/RegistrationRequest"
-                            }
-                        }
-                    },
-                    "required": true
-                },
-                "responses": {
-                    "202": {
-                        "description": "Accepted",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/api/v1/auth/authenticate": {
-            "post": {
-                "tags": [
-                    "authentication-controller"
-                ],
-                "operationId": "authenticate",
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/AuthenticationRequest"
-                            }
-                        }
-                    },
-                    "required": true
-                },
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/AuthenticationResponse"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/api/v1/transaction/total-income/{budgetId}": {
-            "get": {
-                "tags": [
-                    "transaction-controller"
-                ],
-                "operationId": "getTotalIncome",
-                "parameters": [
-                    {
-                        "name": "budgetId",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "format": "uuid"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "number"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/api/v1/transaction/total-expense/{budgetId}": {
-        "get": {
-            "tags": [
-            "transaction-controller"
-            ],
-            "operationId": "getTotalExpense",
-            "parameters": [
-                {
-                    "name": "budgetId",
-                    "in": "path",
-                    "required": true,
-                        "schema": {
-                            "type": "string",
-                            "format": "uuid"
-                        }
-                }
-            ],
-            "responses": {
-                "200": {
-                    "description": "OK",
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "number"
-                            }
-                        }
-                    }
-                }
-            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
         }
+      }
+    },
+    "/api/v1/budget/{id}": {
+      "get": {
+        "tags": [
+          "budget-plan-controller"
+        ],
+        "operationId": "findBudgetPlanById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BudgetPlanDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "budget-plan-controller"
+        ],
+        "operationId": "updateBudgetPlan",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BudgetPlanDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BudgetPlanDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "budget-plan-controller"
+        ],
+        "operationId": "deleteBudgetPlan",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/transaction/{budgetPlanId}": {
+      "post": {
+        "tags": [
+          "transaction-controller"
+        ],
+        "operationId": "saveTransaction",
+        "parameters": [
+          {
+            "name": "budgetPlanId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TransactionDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/budget/": {
+      "get": {
+        "tags": [
+          "budget-plan-controller"
+        ],
+        "operationId": "findAllBudgets",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 10
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageResponseBudgetPlanDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "budget-plan-controller"
+        ],
+        "operationId": "saveBudgetPlan",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BudgetPlanDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/auth/register": {
+      "post": {
+        "tags": [
+          "authentication-controller"
+        ],
+        "operationId": "register",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegistrationRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/auth/authenticate": {
+      "post": {
+        "tags": [
+          "authentication-controller"
+        ],
+        "operationId": "authenticate",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AuthenticationRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthenticationResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/transaction/total-income/{budgetId}": {
+      "get": {
+        "tags": [
+          "transaction-controller"
+        ],
+        "operationId": "getTotalIncome",
+        "parameters": [
+          {
+            "name": "budgetId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "number"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/transaction/total-expense/{budgetId}": {
+      "get": {
+        "tags": [
+          "transaction-controller"
+        ],
+        "operationId": "getTotalExpense",
+        "parameters": [
+          {
+            "name": "budgetId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "number"
+                }
+              }
+            }
+          }
+        }
+      }
     },
     "/api/v1/transaction/remaining-budget/{budgetId}": {
       "get": {
@@ -433,389 +455,411 @@
           "transaction-controller"
         ],
         "operationId": "getRemainingBudget",
-            "parameters": [
-                {
-                "name": "budgetId",
-                "in": "path",
-                "required": true,
-                    "schema": {
-                        "type": "string",
-                        "format": "uuid"
-                    }
-                }
-            ],
-            "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "number"
-                                }
-                            }
-                        }
-                    }
-                }
+        "parameters": [
+          {
+            "name": "budgetId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
             }
-        },
-        "/api/v1/transaction/budget/{budgetId}": {
-            "get": {
-                "tags": [
-                    "transaction-controller"
-                ],
-                "operationId": "findAllTransactionsByBudget",
-                "parameters": [
-                    {
-                        "name": "budgetId",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "format": "uuid"
-                        }
-                    },
-                    {
-                        "name": "page",
-                        "in": "query",
-                        "required": false,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int32",
-                            "default": 0
-                        }
-                    },
-                    {
-                        "name": "size",
-                        "in": "query",
-                        "required": false,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int32",
-                            "default": 10
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/PageResponseTransactionDto"
-                                }
-                            }
-                        }
-                    }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "number"
                 }
+              }
             }
-        },
-        "/api/v1/budget/id": {
-            "delete": {
-                "tags": [
-                    "budget-plan-controller"
-                ],
-                "operationId": "deleteBudgetPlan",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "format": "uuid"
-                        }
-                    }    
-                ],
-                "responses": {
-                    "204": {
-                        "description": "No Content"
-                        },
-                    "404": {
-                        "description": "Not Found"
-                        },
-                    "403": {
-                        "description": "Forbidden"
-                        }
-                    }
-                }
+          }
         }
+      }
     },
-    "components": {
-        "schemas": {
-            "UpdateTransactionDto": {
-                "required": [
-                    "amount",
-                    "category",
-                    "status",
-                    "title",
-                    "type"
-                ],
-                "type": "object",
-                "properties": {
-                    "title": {
-                        "type": "string"
-                    },
-                    "amount": {
-                        "type": "number"
-                    },
-                    "date": {
-                        "type": "string",
-                        "format": "date"
-                    },
-                    "status": {
-                        "type": "string",
-                        "enum": [
-                            "REAL",
-                            "EXPECTED"
-                        ]
-                    },
-                    "category": {
-                        "type": "string",
-                        "enum": [
-                            "INCOME",
-                            "BONUS",
-                            "RENT_MORTGAGE",
-                            "UTILITIES",
-                            "GROCERIES",
-                            "TRANSPORT",
-                            "INSURANCE",
-                            "HEALTH",
-                            "DINING_OUT",
-                            "ENTERTAINMENT",
-                            "SHOPPING",
-                            "TRAVEL",
-                            "SAVINGS",
-                            "INVESTMENTS",
-                            "DEBT",
-                            "GIFTS",
-                            "OTHER"
-                        ]
-                    },
-                    "type": {
-                        "type": "string",
-                        "enum": [
-                            "INCOME",
-                            "EXPANSE"
-                        ]
-                    },
-                    "description": {
-                        "type": "string"
-                    }
-                }
-            },
-            "TransactionDto": {
-                "required": [
-                    "amount",
-                    "category",
-                    "status",
-                    "title",
-                    "type"
-                ],
-                "type": "object",
-                "properties": {
-                    "title": {
-                        "type": "string"
-                    },
-                    "amount": {
-                        "type": "number"
-                    },
-                    "date": {
-                        "type": "string",
-                        "format": "date"
-                    },
-                    "status": {
-                        "type": "string",
-                        "enum": [
-                            "REAL",
-                            "EXPECTED"
-                        ]
-                    },
-                    "category": {
-                        "type": "string",
-                        "enum": [
-                            "INCOME",
-                            "BONUS",
-                            "RENT_MORTGAGE",
-                            "UTILITIES",
-                            "GROCERIES",
-                            "TRANSPORT",
-                            "INSURANCE",
-                            "HEALTH",
-                            "DINING_OUT",
-                            "ENTERTAINMENT",
-                            "SHOPPING",
-                            "TRAVEL",
-                            "SAVINGS",
-                            "INVESTMENTS",
-                            "DEBT",
-                            "GIFTS",
-                            "OTHER"
-                        ]
-                    },
-                    "type": {
-                        "type": "string",
-                        "enum": [
-                            "INCOME",
-                            "EXPANSE"
-                        ]
-                    },
-                    "description": {
-                        "type": "string"
-                    },
-                    "budgetPlanId": {
-                        "type": "string",
-                        "format": "uuid"
-                    }
-                }
-            },
-            "BudgetPlanDto": {
-                "required": [
-                    "initialIncome",
-                    "month",
-                    "year"
-                ],
-                "type": "object",
-                "properties": {
-                    "month": {
-                        "maximum": 12,
-                        "minimum": 1,
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    "year": {
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    "initialIncome": {
-                        "type": "number"
-                    }
-                }
-            },
-            "RegistrationRequest": {
-                "required": [
-                    "email",
-                    "firstname",
-                    "lastname",
-                    "password"
-                ],
-                "type": "object",
-                "properties": {
-                    "firstname": {
-                        "type": "string"
-                    },
-                    "lastname": {
-                        "type": "string"
-                    },
-                    "email": {
-                        "type": "string"
-                    },
-                    "password": {
-                        "maxLength": 2147483647,
-                        "minLength": 8,
-                        "type": "string"
-                    }
-                }
-            },
-            "AuthenticationRequest": {
-                "required": [
-                    "email",
-                    "password"
-                ],
-                "type": "object",
-                "properties": {
-                    "email": {
-                        "type": "string"
-                    },
-                    "password": {
-                        "maxLength": 2147483647,
-                        "minLength": 8,
-                        "type": "string"
-                    }
-                }
-            },
-            "AuthenticationResponse": {
-                "type": "object",
-                "properties": {
-                    "token": {
-                        "type": "string"
-                    }
-                }
-            },
-            "PageResponseTransactionDto": {
-                "type": "object",
-                "properties": {
-                    "content": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/TransactionDto"
-                        }
-                    },
-                    "number": {
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    "size": {
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    "totalElements": {
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    "totalPages": {
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    "first": {
-                        "type": "boolean"
-                    },
-                    "last": {
-                        "type": "boolean"
-                    }
-                }
-            },
-            "PageResponseBudgetPlanDto": {
-                "type": "object",
-                "properties": {
-                    "content": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/BudgetPlanDto"
-                        }
-                    },
-                    "number": {
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    "size": {
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    "totalElements": {
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    "totalPages": {
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    "first": {
-                        "type": "boolean"
-                    },
-                    "last": {
-                        "type": "boolean"
-                    }
-                }
+    "/api/v1/transaction/budget/{budgetId}": {
+      "get": {
+        "tags": [
+          "transaction-controller"
+        ],
+        "operationId": "findAllTransactionsByBudget",
+        "parameters": [
+          {
+            "name": "budgetId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
             }
-        },
-        "securitySchemes": {
-            "BearerAuth": {
-                "type": "http",
-                "description": "jwt auth description",
-                "in": "header",
-                "scheme": "bearer",
-                "bearerFormat": "JWT"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
             }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 10
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageResponseTransactionDto"
+                }
+              }
+            }
+          }
         }
+      }
+    },
+    "/api/v1/budget/current-month/with-transactions": {
+      "get": {
+        "tags": [
+          "budget-plan-controller"
+        ],
+        "operationId": "getCurrentMonthBudgetWithTransactions",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BudgetChartDataDto"
+                }
+              }
+            }
+          }
+        }
+      }
     }
+  },
+  "components": {
+    "schemas": {
+      "UpdateTransactionDto": {
+        "required": [
+          "amount",
+          "category",
+          "status",
+          "title",
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "title": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "number"
+          },
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "REAL",
+              "EXPECTED"
+            ]
+          },
+          "category": {
+            "type": "string",
+            "enum": [
+              "RENT_MORTGAGE",
+              "UTILITIES",
+              "GROCERIES",
+              "TRANSPORT",
+              "INSURANCE",
+              "HEALTH",
+              "DINING_OUT",
+              "ENTERTAINMENT",
+              "SHOPPING",
+              "TRAVEL",
+              "SAVINGS",
+              "INVESTMENTS",
+              "DEBT",
+              "GIFTS",
+              "OTHER"
+            ]
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "INCOME",
+              "EXPENSE"
+            ]
+          },
+          "description": {
+            "type": "string"
+          },
+          "budgetPlanId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      },
+      "TransactionDto": {
+        "required": [
+          "amount",
+          "category",
+          "status",
+          "title",
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "title": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "number"
+          },
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "REAL",
+              "EXPECTED"
+            ]
+          },
+          "category": {
+            "type": "string",
+            "enum": [
+              "RENT_MORTGAGE",
+              "UTILITIES",
+              "GROCERIES",
+              "TRANSPORT",
+              "INSURANCE",
+              "HEALTH",
+              "DINING_OUT",
+              "ENTERTAINMENT",
+              "SHOPPING",
+              "TRAVEL",
+              "SAVINGS",
+              "INVESTMENTS",
+              "DEBT",
+              "GIFTS",
+              "OTHER"
+            ]
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "INCOME",
+              "EXPENSE"
+            ]
+          },
+          "description": {
+            "type": "string"
+          },
+          "budgetPlanId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      },
+      "BudgetPlanDto": {
+        "required": [
+          "initialIncome",
+          "month",
+          "year"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "month": {
+            "maximum": 12,
+            "minimum": 1,
+            "type": "integer",
+            "format": "int32"
+          },
+          "year": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "initialIncome": {
+            "type": "number"
+          }
+        }
+      },
+      "RegistrationRequest": {
+        "required": [
+          "email",
+          "firstname",
+          "lastname",
+          "password"
+        ],
+        "type": "object",
+        "properties": {
+          "firstname": {
+            "type": "string"
+          },
+          "lastname": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "maxLength": 2147483647,
+            "minLength": 8,
+            "type": "string"
+          }
+        }
+      },
+      "AuthenticationRequest": {
+        "required": [
+          "email",
+          "password"
+        ],
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "maxLength": 2147483647,
+            "minLength": 8,
+            "type": "string"
+          }
+        }
+      },
+      "AuthenticationResponse": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string"
+          }
+        }
+      },
+      "PageResponseTransactionDto": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TransactionDto"
+            }
+          },
+          "number": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "size": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalElements": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "totalPages": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "first": {
+            "type": "boolean"
+          },
+          "last": {
+            "type": "boolean"
+          }
+        }
+      },
+      "BudgetChartDataDto": {
+        "type": "object",
+        "properties": {
+          "budgetPlan": {
+            "$ref": "#/components/schemas/BudgetPlanDto"
+          },
+          "expectedTransactions": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          },
+          "realTransactions": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          }
+        }
+      },
+      "PageResponseBudgetPlanDto": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BudgetPlanDto"
+            }
+          },
+          "number": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "size": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalElements": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "totalPages": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "first": {
+            "type": "boolean"
+          },
+          "last": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "BearerAuth": {
+        "type": "http",
+        "description": "jwt auth description",
+        "in": "header",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
 }
