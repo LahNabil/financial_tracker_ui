@@ -347,7 +347,7 @@
           "202": {
             "description": "Accepted",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "type": "object"
                 }
@@ -377,7 +377,7 @@
           "200": {
             "description": "OK",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/AuthenticationResponse"
                 }

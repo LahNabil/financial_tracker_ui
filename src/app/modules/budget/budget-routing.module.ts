@@ -5,35 +5,43 @@ import { BudgetListComponent } from './pages/budget-list/budget-list.component';
 import { ManageBudgetComponent } from './pages/manage-budget/manage-budget.component';
 import { BudgetTransactionListComponent } from './pages/budget-transaction-list/budget-transaction-list.component';
 import { ManageTransactionComponent } from './pages/manage-transaction/manage-transaction.component';
+import { authGuard } from '../../services/guard/auth.guard';
 
 const routes: Routes = [
   {
     path: '',
     component: MainComponent,
+    canActivate: [authGuard],
     children: [
       {
         path: '',
-        component: BudgetListComponent
+        component: BudgetListComponent,
+        canActivate: [authGuard]
       },
       {
         path: 'manage',
-        component: ManageBudgetComponent
+        component: ManageBudgetComponent,
+        canActivate: [authGuard]
       },
       {
         path: 'manage/:id',
-        component: ManageBudgetComponent
+        component: ManageBudgetComponent,
+        canActivate: [authGuard]
       },
       {
         path: 'transactions/:budgetId',
-        component: BudgetTransactionListComponent
+        component: BudgetTransactionListComponent,
+        canActivate: [authGuard]
       },
       {
         path: 'add/transaction/:budgetPlanId',
-        component: ManageTransactionComponent
+        component: ManageTransactionComponent,
+        canActivate: [authGuard]
       },
       {
         path: 'manage/transaction/:id',
-        component: ManageTransactionComponent
+        component: ManageTransactionComponent,
+        canActivate: [authGuard]
       }
     ]
   }

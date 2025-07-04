@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
+import { authGuard } from './services/guard/auth.guard';
 
 const routes: Routes = [
   {
@@ -14,12 +15,14 @@ const routes: Routes = [
   },
   {
     path: 'budgets',
-    loadChildren: ()=> import('./modules/budget/budget.module').then(m=> m.BudgetModule)
+    loadChildren: ()=> import('./modules/budget/budget.module').then(m=> m.BudgetModule),
+    canActivate: [authGuard]
   },
   {
     path: '',
     loadChildren: ()=> import('./modules/dashboard/dashboard.module').then(m=> m.DashboardModule),
-    pathMatch: 'full'
+    pathMatch: 'full',
+    canActivate: [authGuard]
   }
 ];
 

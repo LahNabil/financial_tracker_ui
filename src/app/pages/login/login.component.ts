@@ -28,11 +28,15 @@ export class LoginComponent {
     
   }
   login() {
+    console.log("event clicked")
     this.errorMsg = [];
     this.authService.authenticate({ body: this.authRequest }).subscribe({
       next: (res) => {
+        console.log("------------------------ before checking", res)
         if(res.token){
+          console.log("received token ", res.token)
           this.tokenService.token = res.token as string;
+          console.log('Stored token:', this.tokenService.token); 
           this.router.navigate(['']);
         }
       },
