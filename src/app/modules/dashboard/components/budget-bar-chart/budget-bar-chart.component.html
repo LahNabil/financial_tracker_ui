@@ -1,0 +1,13 @@
+<div *ngIf="hasData; else noData">
+  <canvas baseChart
+    [data]="barChartData"
+    [options]="chartOptions"
+    [type]="barChartType">
+  </canvas>
+</div>
+
+<ng-template #noData>
+  <p class="text-center text-gray-500 mt-4">
+    No data available. Please create some transactions first.
+  </p>
+</ng-template>

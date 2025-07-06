@@ -9,7 +9,8 @@ import { HeaderComponent } from './components/header/header.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { ChartModule } from 'angular-highcharts';
 import { BudgetLineChartComponent } from './components/budget-line-chart/budget-line-chart.component';
-
+import { NgChartsModule } from 'ng2-charts';
+import { BudgetBarChartComponent } from './components/budget-bar-chart/budget-bar-chart.component';
 
 @NgModule({
   declarations: [
@@ -18,12 +19,14 @@ import { BudgetLineChartComponent } from './components/budget-line-chart/budget-
     SidebarComponent,
     HeaderComponent,
     DashboardComponent,
-    BudgetLineChartComponent
+    BudgetLineChartComponent,
+    BudgetBarChartComponent
   ],
   imports: [
     CommonModule,
     DashboardRoutingModule,
-    ChartModule
+    ChartModule,
+    NgChartsModule
   ]
 })
 export class DashboardModule { }

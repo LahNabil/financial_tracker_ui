@@ -5,3 +5,4 @@
 export { TransactionControllerService } from './services/transaction-controller.service';
 export { BudgetPlanControllerService } from './services/budget-plan-controller.service';
 export { AuthenticationControllerService } from './services/authentication-controller.service';
+export { DashboardControllerService } from './services/dashboard-controller.service';

@@ -1,1 +1,13 @@
-<div [chart]="chart"></div>
+<div *ngIf="!hasData" class="text-center text-gray-600 mt-4">
+  <p>No data available for this budget.<br>Please add some transactions to get started.</p>
+</div>
+
+<canvas
+  *ngIf="hasData"
+  baseChart
+  [data]="doughnutChartData"
+  [type]="doughnutChartType"
+  [options]="{ responsive: true, maintainAspectRatio: false }">
+</canvas>
+
+

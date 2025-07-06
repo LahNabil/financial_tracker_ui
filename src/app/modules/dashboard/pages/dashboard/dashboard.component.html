@@ -1,3 +1,27 @@
-<div class="chart-wrapper">
-  <app-budget-line-chart></app-budget-line-chart>
+<div class="dashboard-container">
+
+  <!-- Header Section -->
+  <div class="dashboard-header">
+    <h2 class="dashboard-title">📊 My Budget Dashboard</h2>
+    <div class="budget-select">
+      <label for="budgetSelect">Choose a budget:</label>
+      <select id="budgetSelect" (change)="onBudgetChange($event)">
+        <option value="">(Current Month - Default)</option>
+        <option *ngFor="let budget of budgets" [value]="budget.id">
+          {{ budget.month }}/{{ budget.year }}
+        </option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Charts -->
+  <div class="chart-grid">
+    <div class="chart-card">
+      <app-budget-chart [budgetId]="selectedBudgetId"></app-budget-chart>
+    </div>
+    <div class="chart-card">
+      <app-budget-bar-chart [budgetId]="selectedBudgetId"></app-budget-bar-chart>
+    </div>
+  </div>
+
 </div>

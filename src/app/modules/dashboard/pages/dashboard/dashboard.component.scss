@@ -1,10 +1,68 @@
-.chart-wrapper {
-  display: flex;
-  justify-content: flex-start; // aligns to the left
-  width: 100%; // or limit it if needed
+.dashboard-container {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  font-family: 'Segoe UI', Roboto, sans-serif;
+}
 
-  app-budget-line-chart {
-    width: 50%; // adjust to desired size
-    height: 200px; // adjust height if necessary
+.dashboard-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+
+  .dashboard-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #1f2937;
+  }
+
+  .budget-select {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    font-size: 0.95rem;
+
+    label {
+      font-weight: 500;
+      color: #374151;
+    }
+
+    select {
+      padding: 0.5rem 0.75rem;
+      border: 1px solid #d1d5db;
+      border-radius: 0.5rem;
+      background-color: #fff;
+      transition: border-color 0.2s ease;
+
+      &:focus {
+        border-color: #3b82f6;
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+      }
+    }
+  }
+}
+
+.chart-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.chart-card {
+  background: #ffffff;
+  border-radius: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  padding: 1.5rem;
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: translateY(-4px);
   }
 }

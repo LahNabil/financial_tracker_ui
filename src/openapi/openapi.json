@@ -531,6 +531,37 @@
         }
       }
     },
+    "/api/v1/dashboard/": {
+      "get": {
+        "tags": [
+          "dashboard-controller"
+        ],
+        "operationId": "GetDashboard",
+        "parameters": [
+          {
+            "name": "budgetId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DashboardResponseDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/budget/current-month/with-transactions": {
       "get": {
         "tags": [
@@ -795,6 +826,51 @@
           },
           "last": {
             "type": "boolean"
+          }
+        }
+      },
+      "CategorySummaryDto": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "type": "string",
+            "enum": [
+              "RENT_MORTGAGE",
+              "UTILITIES",
+              "GROCERIES",
+              "TRANSPORT",
+              "INSURANCE",
+              "HEALTH",
+              "DINING_OUT",
+              "ENTERTAINMENT",
+              "SHOPPING",
+              "TRAVEL",
+              "SAVINGS",
+              "INVESTMENTS",
+              "DEBT",
+              "GIFTS",
+              "OTHER"
+            ]
+          },
+          "total": {
+            "type": "number"
+          }
+        }
+      },
+      "DashboardResponseDto": {
+        "type": "object",
+        "properties": {
+          "totalIncome": {
+            "type": "number"
+          },
+          "totalExpenses": {
+            "type": "number"
+          },
+          "expensesByCategory": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CategorySummaryDto"
+            }
           }
         }
       },

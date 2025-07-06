@@ -9,6 +9,7 @@ import { ApiConfiguration, ApiConfigurationParams } from './api-configuration';
 import { TransactionControllerService } from './services/transaction-controller.service';
 import { BudgetPlanControllerService } from './services/budget-plan-controller.service';
 import { AuthenticationControllerService } from './services/authentication-controller.service';
+import { DashboardControllerService } from './services/dashboard-controller.service';
 
 /**
  * Module that provides all services and configuration.
@@ -21,6 +22,7 @@ import { AuthenticationControllerService } from './services/authentication-contr
     TransactionControllerService,
     BudgetPlanControllerService,
     AuthenticationControllerService,
+    DashboardControllerService,
     ApiConfiguration
   ],
 })

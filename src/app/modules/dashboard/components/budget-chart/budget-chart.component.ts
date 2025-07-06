@@ -1,6 +1,9 @@
 
-import { Component, Input, OnInit } from '@angular/core';
-import { Chart } from 'angular-highcharts';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { DashboardControllerService } from '../../../../services/services';
+import { DashboardResponseDto } from '../../../../services/models';
+import { BaseChartDirective } from 'ng2-charts';
+import { ChartConfiguration, ChartType } from 'chart.js';
 
 @Component({
   selector: 'app-budget-chart',
@@ -8,57 +11,65 @@ import { Chart } from 'angular-highcharts';
   templateUrl: './budget-chart.component.html',
   styleUrl: './budget-chart.component.scss'
 })
-export class BudgetChartComponent implements OnInit {
-  @Input() monthlyTransactions: { month: string, planned: number, spent: number }[] = [];
+export class BudgetChartComponent implements OnInit{
+  @ViewChild(BaseChartDirective) chart?: BaseChartDirective;
 
-  chart!: Chart;
+  @Input() budgetId?: string;
+  public hasData: boolean = true;
+  public doughnutChartLabels: string[] = [];
+  public doughnutChartData: ChartConfiguration<'doughnut'>['data'] = {
+    labels: this.doughnutChartLabels,
+    datasets: [
+      {
+        data: []
+      }
+    ]
+  };
+  public doughnutChartType: ChartType = 'doughnut';
+
+  constructor(private dashboardService: DashboardControllerService) {}
 
   ngOnInit(): void {
-    this.initChart();
+    this.fetchData();
   }
-
-  initChart() {
-    const months = this.monthlyTransactions.map(item => item.month);
-    const planned = this.monthlyTransactions.map(item => item.planned);
-    const spent = this.monthlyTransactions.map(item => item.spent);
-
-    this.chart = new Chart({
-      chart: {
-        type: 'column'
-      },
-      title: {
-        text: 'Budget vs Dépenses par Mois'
-      },
-      xAxis: {
-        categories: months,
-        title: {
-          text: 'Mois'
-        }
-      },
-      yAxis: {
-        min: 0,
-        title: {
-          text: 'Montant (MAD)'
-        }
-      },
-      series: [
-        {
-          name: 'Prévu',
-          data: planned,
-          type: 'column',
-          color: '#7cb5ec'
-        },
-        {
-          name: 'Dépensé',
-          data: spent,
-          type: 'column',
-          color: '#f45b5b'
-        }
-      ],
-      credits: {
-        enabled: false
-      }
-    });
+  ngOnChanges(): void {
+    this.fetchData();
   }
+  fetchData(): void {
+  const params = this.budgetId ? { budgetId: this.budgetId } : {};
+  this.dashboardService.getDashboard(params).subscribe((data: DashboardResponseDto) => {
+    const labels = data.expensesByCategory?.map(e => e.category ?? 'Unknown') ?? [];
+    const values = data.expensesByCategory?.map(e => e.total ?? 0) ?? [];
+
+    this.hasData = values.some(value => value > 0);
+
+    if (!this.hasData) {
+      return; // Pas besoin de continuer si aucune donnée
+    }
+
+    const generatedColors = this.generateColors(labels.length);
+
+    this.doughnutChartData.labels = labels;
+    this.doughnutChartData.datasets[0].data = values;
+    this.doughnutChartData.datasets[0].backgroundColor = generatedColors;
+
+    this.chart?.update();
+  });
+}
+
+  generateColors(count: number): string[] {
+  const colors: string[] = [];
+  for (let i = 0; i < count; i++) {
+    const hue = Math.floor((360 / count) * i);
+    colors.push(`hsl(${hue}, 70%, 60%)`); // 💡 Pastel unique colors
+  }
+  return colors;
+}
+
+
+ 
+  
+
+  
 }
 
