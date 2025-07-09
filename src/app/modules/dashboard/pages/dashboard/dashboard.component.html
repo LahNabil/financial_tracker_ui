@@ -1,12 +1,18 @@
-<div class="dashboard-container">
+<div class="dashboard-wrapper bg-[#f9fafb] min-h-screen px-6 py-8 space-y-10">
 
-  <!-- Header Section -->
-  <div class="dashboard-header">
-    <h2 class="dashboard-title">📊 My Budget Dashboard</h2>
-    <div class="budget-select">
-      <label for="budgetSelect">Choose a budget:</label>
-      <select id="budgetSelect" (change)="onBudgetChange($event)">
-        <option value="">(Current Month - Default)</option>
+  <!-- Title & Controls -->
+  <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+    <div>
+      <h2 class="text-3xl font-bold text-gray-900 tracking-tight">My Budget Dashboard</h2>
+      <p class="text-sm text-gray-500 mt-1">Overview of your monthly financial activity.</p>
+    </div>
+
+    <div class="flex items-center gap-3">
+      <label for="budgetSelect" class="text-sm font-medium text-gray-700">Choose a Budget</label>
+      <select id="budgetSelect"
+              (change)="onBudgetChange($event)"
+              class="appearance-none border border-gray-300 rounded-xl px-4 py-2 text-sm shadow-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none bg-white">
+        <option value="">Current Month (Default)</option>
         <option *ngFor="let budget of budgets" [value]="budget.id">
           {{ budget.month }}/{{ budget.year }}
         </option>
@@ -14,14 +20,32 @@
     </div>
   </div>
 
-  <!-- Charts -->
-  <div class="chart-grid">
-    <div class="chart-card">
+  <!-- Charts Grid -->
+  <div class="grid grid-cols-1 xl:grid-cols-2 gap-8">
+    <div class="card p-6 bg-white rounded-3xl shadow hover:shadow-md transition-shadow duration-300">
+      <div class="flex justify-between items-center mb-4">
+        <h3 class="text-lg font-semibold text-gray-800">Expenses by Category</h3>
+        <span class="text-xs text-gray-400">Current Month</span>
+      </div>
       <app-budget-chart [budgetId]="selectedBudgetId"></app-budget-chart>
     </div>
-    <div class="chart-card">
+
+    <div class="card p-6 bg-white rounded-3xl shadow hover:shadow-md transition-shadow duration-300">
+      <div class="flex justify-between items-center mb-4">
+        <h3 class="text-lg font-semibold text-gray-800">Income vs Expenses</h3>
+        <span class="text-xs text-gray-400">Tracking performance</span>
+      </div>
       <app-budget-bar-chart [budgetId]="selectedBudgetId"></app-budget-bar-chart>
     </div>
+  </div>
+
+  <!-- Line Chart -->
+  <div class="card p-6 bg-white rounded-3xl shadow hover:shadow-md transition-shadow duration-300">
+    <div class="flex justify-between items-center mb-4">
+      <h3 class="text-lg font-semibold text-gray-800">Real vs Expected Transactions</h3>
+      <span class="text-xs text-gray-400">Forecast comparison</span>
+    </div>
+    <app-budget-line-chart [budgetId]="selectedBudgetId"></app-budget-line-chart>
   </div>
 
 </div>

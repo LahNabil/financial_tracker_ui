@@ -11,5 +11,6 @@ export type { DashboardResponseDto } from './models/dashboard-response-dto';
 export type { PageResponseBudgetPlanDto } from './models/page-response-budget-plan-dto';
 export type { PageResponseTransactionDto } from './models/page-response-transaction-dto';
 export type { RegistrationRequest } from './models/registration-request';
+export type { TransactionComparisonDto } from './models/transaction-comparison-dto';
 export type { TransactionDto } from './models/transaction-dto';
 export type { UpdateTransactionDto } from './models/update-transaction-dto';

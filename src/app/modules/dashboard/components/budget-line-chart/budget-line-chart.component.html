@@ -1,1 +1,10 @@
-<!-- <div [chart]="lineChart"></div> -->
+<div class="chart-container">
+  <canvas *ngIf="hasData" baseChart
+          [data]="lineChartData"
+          [options]="lineChartOptions"
+          [type]="lineChartType">
+  </canvas>
+  <div *ngIf="!hasData" class="no-data">
+    No transaction data available for this budget period.
+  </div>
+</div>

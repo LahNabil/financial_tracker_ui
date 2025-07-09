@@ -531,6 +531,37 @@
         }
       }
     },
+    "/api/v1/dashboard/line": {
+      "get": {
+        "tags": [
+          "dashboard-controller"
+        ],
+        "operationId": "getTransactionComparison",
+        "parameters": [
+          {
+            "name": "budgetId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransactionComparisonDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/dashboard/": {
       "get": {
         "tags": [
@@ -826,6 +857,29 @@
           },
           "last": {
             "type": "boolean"
+          }
+        }
+      },
+      "TransactionComparisonDto": {
+        "type": "object",
+        "properties": {
+          "realTransactions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TransactionDto"
+            }
+          },
+          "expectedTransactions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TransactionDto"
+            }
+          },
+          "totalReal": {
+            "type": "number"
+          },
+          "totalExpected": {
+            "type": "number"
           }
         }
       },

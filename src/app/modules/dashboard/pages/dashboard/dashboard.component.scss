@@ -1,68 +1,31 @@
-.dashboard-container {
+.dashboard-wrapper {
+  background: #f9fafb;
+  min-height: 100vh;
   padding: 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
-  font-family: 'Segoe UI', Roboto, sans-serif;
-}
 
-.dashboard-header {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 2rem;
+  .card {
+    background: white;
+    border-radius: 1.5rem;
+    padding: 1.5rem;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.05);
+    transition: box-shadow 0.3s ease-in-out;
 
-  .dashboard-title {
-    font-size: 1.8rem;
-    font-weight: 600;
-    color: #1f2937;
-  }
-
-  .budget-select {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-    font-size: 0.95rem;
-
-    label {
-      font-weight: 500;
-      color: #374151;
-    }
-
-    select {
-      padding: 0.5rem 0.75rem;
-      border: 1px solid #d1d5db;
-      border-radius: 0.5rem;
-      background-color: #fff;
-      transition: border-color 0.2s ease;
-
-      &:focus {
-        border-color: #3b82f6;
-        outline: none;
-        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
-      }
+    &:hover {
+      box-shadow: 0 12px 20px rgba(0, 0, 0, 0.08);
     }
   }
-}
 
-.chart-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.5rem;
+  select {
+    border-radius: 0.75rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid #ccc;
+    font-size: 0.875rem;
+    background-color: #fff;
 
-  @media (min-width: 768px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-.chart-card {
-  background: #ffffff;
-  border-radius: 1rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-  padding: 1.5rem;
-  transition: transform 0.2s ease;
-
-  &:hover {
-    transform: translateY(-4px);
+    &:focus {
+      outline: none;
+      border-color: #6366f1;
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+    }
   }
 }

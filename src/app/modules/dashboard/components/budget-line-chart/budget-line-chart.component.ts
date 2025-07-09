@@ -1,7 +1,18 @@
-import { Component, OnInit } from '@angular/core';
-import { Chart } from 'angular-highcharts';
-import { BudgetPlanControllerService } from '../../../../services/services';
-import { Router } from '@angular/router';
+import {
+  Component, OnInit, Input, ViewChild, OnChanges, SimpleChanges
+} from '@angular/core';
+import {
+  ChartConfiguration, ChartType
+} from 'chart.js';
+import {
+  DashboardControllerService
+} from '../../../../services/services';
+import {
+  TransactionDto, TransactionComparisonDto
+} from '../../../../services/models';
+import {
+  BaseChartDirective
+} from 'ng2-charts';
 
 @Component({
   selector: 'app-budget-line-chart',
@@ -9,152 +20,131 @@ import { Router } from '@angular/router';
   templateUrl: './budget-line-chart.component.html',
   styleUrls: ['./budget-line-chart.component.scss']
 })
-export class BudgetLineChartComponent implements OnInit {
-  lineChart!: Chart;
-  loading = true;
-  error = false;
+export class BudgetLineChartComponent implements OnInit, OnChanges {
+  @ViewChild(BaseChartDirective) chart?: BaseChartDirective;
+  @Input() budgetId?: string;
 
-  constructor(
-    private budgetPlanService: BudgetPlanControllerService, 
-    private router: Router
-  ) {}
+  public hasData: boolean = true;
+
+  public lineChartData: ChartConfiguration<'line'>['data'] = {
+    datasets: [],
+    labels: []
+  };
+
+  public lineChartOptions: ChartConfiguration<'line'>['options'] = {
+    responsive: true,
+    scales: {
+      y: {
+        beginAtZero: true,
+        title: {
+          display: true,
+          text: 'Amount'
+        }
+      },
+      x: {
+        title: {
+          display: true,
+          text: 'Date'
+        }
+      }
+    },
+    plugins: {
+      tooltip: {
+        callbacks: {
+          label: (context) => {
+            let label = context.dataset.label || '';
+            if (label) label += ': ';
+            if (context.parsed.y !== null) {
+              label += new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'MAD'
+              }).format(context.parsed.y);
+            }
+            return label;
+          }
+        }
+      }
+    }
+  };
+
+  public lineChartType: 'line' = 'line';
+
+  constructor(private dashboardService: DashboardControllerService) {}
 
   ngOnInit(): void {
-    this.loadBudgetData();
+    this.fetchData();
   }
 
-  loadBudgetData(): void {
-    this.budgetPlanService.getCurrentMonthBudgetWithTransactions$Response().subscribe({
-      next: (response) => {
-        const data = response.body;
-        if (data) {
-          this.initializeChart(data);
-        }
-        this.loading = false;
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['budgetId']) {
+      this.fetchData();
+    }
+  }
+
+  fetchData(): void {
+    const params = this.budgetId ? { budgetId: this.budgetId } : {};
+    this.dashboardService.getTransactionComparison(params).subscribe({
+      next: (data: TransactionComparisonDto) => {
+        this.prepareChartData(data);
       },
       error: (err) => {
-        console.error('Error loading budget data:', err);
-        this.error = true;
-        this.loading = false;
+        console.error('Failed to load comparison data', err);
+        this.hasData = false;
       }
     });
   }
 
-  initializeChart(data: any): void {
-    const daysInMonth = new Date(data.budgetPlan.year, data.budgetPlan.month, 0).getDate();
-    const dates = Array.from({length: daysInMonth}, (_, i) => (i + 1).toString());
-    
-    // Initialize both series with 0 on day 0
-    const initialIncome = data.budgetPlan.initialIncome || 0;
-    
-    // Process planned budget (expected transactions)
-    const plannedBudget = this.calculateBudgetFlow(
-      initialIncome,
-      data.expectedTransactions,
-      daysInMonth
-    );
-    
-    // Process actual transactions
-    const actualTransactions = this.calculateBudgetFlow(
-      initialIncome,
-      data.realTransactions,
-      daysInMonth
-    );
-    
-    // Calculate min/max values for yAxis
-    const allValues = [...plannedBudget, ...actualTransactions];
-    const minY = Math.min(0, ...allValues);
-    const maxY = Math.max(initialIncome, ...allValues);
+  private prepareChartData(data: TransactionComparisonDto): void {
+    const real = this.processTransactions(data.realTransactions || []);
+    const expected = this.processTransactions(data.expectedTransactions || []);
 
-    this.lineChart = new Chart({
-      chart: {
-        type: 'line'
-      },
-      title: {
-        text: `Budget Flow for ${this.getMonthName(data.budgetPlan.month)} ${data.budgetPlan.year}`
-      },
-      credits: {
-        enabled: false
-      },
-      xAxis: {
-        categories: ['Start', ...dates], // Added 'Start' for day 0
-        title: {
-          text: 'Day of Month'
-        }
-      },
-      yAxis: {
-        title: {
-          text: 'Amount (€)'
-        },
-        min: minY,
-        max: maxY,
-        labels: {
-          formatter: function() {
-            return '€' + this.value;
-          }
-        }
-      },
-      tooltip: {
-        pointFormat: '<b>€{point.y:,.2f}</b>',
-        valueDecimals: 2
-      },
-      plotOptions: {
-        series: {
-          marker: {
-            enabled: true
-          }
-        }
-      },
-      series: [
+    const allDates = [...new Set([
+      ...real.dates,
+      ...expected.dates
+    ])].sort((a, b) => new Date(a).getTime() - new Date(b).getTime());
+
+    this.hasData = real.total > 0 || expected.total > 0;
+    if (!this.hasData) return;
+
+    this.lineChartData = {
+      labels: allDates,
+      datasets: [
         {
-          type: 'line',
-          name: 'Planned Budget',
-          data: plannedBudget,
-          color: '#0000FF',  // blue line
-          dashStyle: 'Dash'
+          label: 'Real Transactions',
+          data: allDates.map(date => real.amountsByDate[date] || 0),
+          borderColor: 'rgba(75, 192, 192, 1)',
+          backgroundColor: 'rgba(75, 192, 192, 0.2)',
+          tension: 0.1,
+          fill: false
         },
         {
-          type: 'line',
-          name: 'Actual Balance',
-          data: actualTransactions,
-          color: '#FF0000'  // red line
+          label: 'Expected Transactions',
+          data: allDates.map(date => expected.amountsByDate[date] || 0),
+          borderColor: 'rgba(255, 159, 64, 1)',
+          backgroundColor: 'rgba(255, 159, 64, 0.2)',
+          borderDash: [5, 5],
+          tension: 0.1,
+          fill: false
         }
       ]
+    };
+
+    this.chart?.update();
+  }
+
+  private processTransactions(transactions: TransactionDto[]) {
+    const amountsByDate: { [key: string]: number } = {};
+    const dates: string[] = [];
+    let total = 0;
+
+    transactions.forEach(t => {
+      const dateStr = t.date?.split('T')[0] ?? 'unknown-date';
+      const amount = t.amount ?? 0;
+      amountsByDate[dateStr] = (amountsByDate[dateStr] || 0) + amount;
+      if (!dates.includes(dateStr)) dates.push(dateStr);
+      total += amount;
     });
-  }
 
-  private calculateBudgetFlow(initialAmount: number, transactions: number[], daysInMonth: number): number[] {
-    // Start with initial amount on day 0
-    const flow = [initialAmount];
-    let currentAmount = initialAmount;
-    
-    // Distribute transactions across the month
-    // This is simplified - you should ideally have dates for each transaction
-    const transactionsPerDay = Math.max(1, Math.floor(transactions.length / daysInMonth));
-    
-    for (let day = 1; day <= daysInMonth; day++) {
-      // Get transactions for this day (simplified distribution)
-      const dayTransactions = transactions.slice(
-        (day-1) * transactionsPerDay,
-        day * transactionsPerDay
-      );
-      
-      // Apply transactions
-      dayTransactions.forEach(amount => {
-        currentAmount += amount;
-      });
-      
-      flow.push(currentAmount);
-    }
-    
-    return flow;
-  }
-
-  private getMonthName(monthNumber: number): string {
-    const months = [
-      'January', 'February', 'March', 'April', 'May', 'June',
-      'July', 'August', 'September', 'October', 'November', 'December'
-    ];
-    return months[monthNumber - 1];
+    return { amountsByDate, dates, total };
   }
 }

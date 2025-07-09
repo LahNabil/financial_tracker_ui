@@ -14,11 +14,39 @@ import { StrictHttpResponse } from '../strict-http-response';
 import { DashboardResponseDto } from '../models/dashboard-response-dto';
 import { getDashboard } from '../fn/dashboard-controller/get-dashboard';
 import { GetDashboard$Params } from '../fn/dashboard-controller/get-dashboard';
+import { getTransactionComparison } from '../fn/dashboard-controller/get-transaction-comparison';
+import { GetTransactionComparison$Params } from '../fn/dashboard-controller/get-transaction-comparison';
+import { TransactionComparisonDto } from '../models/transaction-comparison-dto';
 
 @Injectable({ providedIn: 'root' })
 export class DashboardControllerService extends BaseService {
   constructor(config: ApiConfiguration, http: HttpClient) {
     super(config, http);
+  }
+
+  /** Path part for operation `getTransactionComparison()` */
+  static readonly GetTransactionComparisonPath = '/api/v1/dashboard/line';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `getTransactionComparison()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getTransactionComparison$Response(params?: GetTransactionComparison$Params, context?: HttpContext): Observable<StrictHttpResponse<TransactionComparisonDto>> {
+    return getTransactionComparison(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `getTransactionComparison$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getTransactionComparison(params?: GetTransactionComparison$Params, context?: HttpContext): Observable<TransactionComparisonDto> {
+    return this.getTransactionComparison$Response(params, context).pipe(
+      map((r: StrictHttpResponse<TransactionComparisonDto>): TransactionComparisonDto => r.body)
+    );
   }
 
   /** Path part for operation `getDashboard()` */

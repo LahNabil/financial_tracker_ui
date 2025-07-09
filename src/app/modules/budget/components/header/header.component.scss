@@ -1,41 +1,31 @@
-li > a {
-  &:hover {
-    background-color: #d6e5f1;
-    border-radius: 5px;
-    text-decoration: underline;
-  }
-  &.active {
-    color: #24a7e9;
-    border-radius: 5px;
-  }
-}
-.logo-dig{
-  height: 85px;
-  width: auto;
-  object-fit: cover;
-
-}
-.container-fluid{
-  padding-left: 5%;
-  padding-right: 5%;
-}
-.user{
-    text-decoration: none; /* Removes underline */
-    color: inherit; /* Keeps the current color */
-    font-weight: bold; /* Makes the text bold */
-}
-.navbar {
-  background-color: #737373 !important; /* Change this to any color you want */
-  color: white;
+.dashboard-navbar {
+  background-color: #374151 !important; // Dark professional gray
   height: 70px;
+  color: white;
 
-  a, .user, .btn-link i {
-    color: white; /* Text and icon color inside the navbar */
+  .navbar-brand {
+    display: flex;
+    align-items: center;
   }
 
-  a:hover,
-  .user:hover,
-  .btn-link:hover i {
-    color: #ffdd57; /* Optional hover effect */
+  .logo-dig {
+    height: 55px;
+    object-fit: contain;
+  }
+
+  .user, .logout-btn {
+    color: white;
+    font-weight: 600;
+    transition: color 0.3s;
+    text-decoration: none;
+  }
+
+  .user:hover, .logout-btn:hover {
+    color: #a1cd62;
+  }
+
+  .logout-btn {
+    background: none;
+    border: none;
   }
 }
