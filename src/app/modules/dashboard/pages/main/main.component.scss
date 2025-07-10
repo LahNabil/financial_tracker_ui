@@ -13,9 +13,28 @@ html, body {
 
 
 /* Main content area */
+
 .main-content {
   display: flex;
   flex-direction: column;
   flex-grow: 1; /* This will allow the main content to take the remaining space */ /* Optional padding */
+  margin-left: 8%;
+  margin-top: 5%;
+}
+.headbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1050;
+}
+
+/* Sticky Sidebar */
+.sidebar {
+  position: fixed;
+  top: 60px; /* same as header height */
+  left: 0;
+  overflow-y: auto;
+  z-index: 1040;
 }
 

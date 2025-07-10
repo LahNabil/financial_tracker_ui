@@ -44,7 +44,7 @@ export class BudgetChartComponent implements OnInit{
     this.hasData = values.some(value => value > 0);
 
     if (!this.hasData) {
-      return; // Pas besoin de continuer si aucune donnée
+      return; 
     }
 
     const generatedColors = this.generateColors(labels.length);

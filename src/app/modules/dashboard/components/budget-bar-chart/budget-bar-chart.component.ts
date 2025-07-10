@@ -22,9 +22,10 @@ export class BudgetBarChartComponent implements OnInit {
     labels: ['Income', 'Expenses'],
     datasets: [
       {
-        label: 'Amount (DH)', // Change as needed
+        label: 'Amount (DH)',
         data: [],
-        backgroundColor: ['#34d399', '#f87171']
+        backgroundColor: ['#3399ff', '#fff748'],
+        barThickness: 60
       }
     ]
   };

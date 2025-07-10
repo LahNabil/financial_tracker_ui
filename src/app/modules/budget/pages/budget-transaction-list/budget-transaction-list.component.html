@@ -1,69 +1,119 @@
 <div class="transaction-list container-fluid py-4 px-3">
-  <!-- Header -->
-  <div class="d-flex justify-content-between align-items-center mb-4">
-    <h3 style="color: #78bdb9; font-weight: bold;">
-      Transactions Of Your Budget Plan with 
-      {{ budget.initialIncome }} MAD – {{ budget.month }}/{{ budget.year }}
-    </h3>
-    <a [routerLink]="['/budgets/add/transaction', budgetId]" class="btn btn-primary shadow-sm">
+  <!-- Header with improved spacing and contrast -->
+  <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-4 gap-3">
+    <div>
+      <h2 class="mb-1" style="color: #2c3e50; font-weight: 600;">Budget Transactions</h2>
+    <div class="budget-meta d-flex align-items-center flex-wrap gap-2 mt-2">
+      <span class="month-year-badge">
+        <i class="fas fa-calendar-alt me-2"></i>
+        {{ budget.month }} / {{ budget.year }}
+      </span>
+      <span class="initial-income-badge">
+        <i class="fas fa-coins me-2"></i>
+        {{ budget.initialIncome | number: '1.2-2' }} MAD
+      </span>
+    </div>
+    </div>
+    <a [routerLink]="['/budgets/add/transaction', budgetId]" class="btn btn-primary shadow-sm px-4 py-2">
       <i class="fas fa-plus me-2"></i> Add Transaction
     </a>
   </div>
 
-  <div class="row mb-3">
-    <div class="col-md-4">
-      <div class="alert alert-success shadow-sm d-flex justify-content-between align-items-center">
-        <strong>Total Incomes:</strong>
-        <span>{{ totalIncome | number: '1.2-2' }} MAD</span>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="alert alert-danger shadow-sm d-flex justify-content-between align-items-center">
-        <strong>Total Expenses:</strong>
-        <span>{{ totalExpense | number: '1.2-2' }} MAD</span>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="alert alert-info shadow-sm d-flex justify-content-between align-items-center">
-        <strong>Remaining Budget:</strong>
-        <span>{{ remainingBudget | number: '1.2-2' }} MAD</span>
+  <!-- Summary Cards (Modern Design) -->
+  <div class="row mb-4 g-3">
+  <!-- Income Card -->
+  <div class="col-md-4">
+    <div class="summary-card income-card p-3 rounded-3 shadow-sm">
+      <div class="d-flex justify-content-between align-items-center">
+        <div>
+          <p class="small text-white-80 mb-1">Total Incomes</p>
+          <h3 class="mb-0 text-white">
+            {{ totalIncome | number: '1.2-2' }} 
+            <small class="text-white-60 fs-6">MAD</small>
+          </h3>
+        </div>
+        <div class="icon-circle bg-white-20">
+          <i class="fas fa-arrow-down text-white"></i>
+        </div>
       </div>
     </div>
   </div>
-  <!-- Table Card -->
-  <div class="card shadow-sm border-0 rounded-3">
+
+  <!-- Expense Card -->
+  <div class="col-md-4">
+    <div class="summary-card expense-card p-3 rounded-3 shadow-sm">
+      <div class="d-flex justify-content-between align-items-center">
+        <div>
+          <p class="small text-white-80 mb-1">Total Expenses</p>
+          <h3 class="mb-0 text-white">
+            {{ totalExpense | number: '1.2-2' }} 
+            <small class="text-white-60 fs-6">MAD</small>
+          </h3>
+        </div>
+        <div class="icon-circle bg-white-20">
+          <i class="fas fa-arrow-up text-white"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Remaining Budget Card -->
+  <div class="col-md-4">
+    <div class="summary-card remaining-card p-3 rounded-3 shadow-sm">
+      <div class="d-flex justify-content-between align-items-center">
+        <div>
+          <p class="small text-white-80 mb-1">Remaining Budget</p>
+          <h3 class="mb-0 text-white">
+            {{ remainingBudget | number: '1.2-2' }} 
+            <small class="text-white-60 fs-6">MAD</small>
+          </h3>
+        </div>
+        <div class="icon-circle bg-white-20">
+          <i class="fas fa-wallet text-white"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <!-- Table Card (Cleaner Design) -->
+  <div class="card shadow-sm border-0 rounded-3 overflow-hidden">
     <div class="card-body p-0">
       <div class="table-responsive">
-        <table class="table table-hover table-bordered text-center align-middle mb-0">
-          <thead class="table-light text-uppercase small">
+        <table class="table table-hover align-middle mb-0">
+          <thead class="table-light">
             <tr>
-              <th>Title</th>
+              <th class="ps-4">Title</th>
               <th>Amount (MAD)</th>
               <th>Date</th>
               <th>Status</th>
               <th>Category</th>
               <th>Type</th>
               <th>Description</th>
-              <th>Actions</th>
+              <th class="text-center">Actions</th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let transaction of transactionResponse.content">
-              <td>{{ transaction.title }}</td>
-              <td>{{ transaction.amount | number:'1.2-2' }}</td>
+              <td class="ps-4 fw-medium">{{ transaction.title }}</td>
+              <td [ngClass]="{'text-success': transaction.type === 'INCOME', 'text-danger': transaction.type === 'EXPENSE'}">
+                {{ transaction.amount | number:'1.2-2' }} MAD
+              </td>
               <td>{{ transaction.date | date:'shortDate' }}</td>
               <td>
                   {{ transaction.status }}
               </td>
-              <td>{{ transaction.category }}</td>
+              <td>
+                <span class="badge bg-light text-dark">{{ transaction.category }}</span>
+              </td>
               <td class="text-capitalize">{{ transaction.type }}</td>
               <td>{{ transaction.description }}</td>
-              <td>
+              <td class="text-center">
                 <div class="action-buttons d-flex justify-content-center gap-2">
-                  <button class="btn btn-sm btn-outline-success" (click)="onEdit(transaction)">
-                    <i class="fas fa-edit"></i>
+                  <button class="btn btn-sm btn-edit" (click)="onEdit(transaction)" title="Edit">
+                    <i class="fas fa-pencil-alt"></i>
                   </button>
-                  <button class="btn btn-sm btn-outline-danger" (click)="deleteTransaction(transaction)">
+                  <button class="btn btn-sm btn-archive" (click)="deleteTransaction(transaction)" title="Archive">
                     <i class="fas fa-archive"></i>
                   </button>
                 </div>
@@ -75,34 +125,31 @@
     </div>
   </div>
 
-  <!-- Pagination -->
+  <!-- Pagination (Simplified) -->
   <div class="d-flex justify-content-center mt-4">
     <nav>
       <ul class="pagination pagination-sm">
         <li class="page-item" [class.disabled]="page === 0">
-          <a class="page-link" href="javascript:void(0)" (click)="goToFirstPage()">
+          <a class="page-link" (click)="goToFirstPage()" aria-label="First">
             <i class="fas fa-angles-left"></i>
           </a>
         </li>
         <li class="page-item" [class.disabled]="page === 0">
-          <a class="page-link" href="javascript:void(0)" (click)="goToPreviousPage()">
+          <a class="page-link" (click)="goToPreviousPage()" aria-label="Previous">
             <i class="fas fa-angle-left"></i>
           </a>
         </li>
-        <li class="page-item"
-            *ngFor="let _ of [].constructor(transactionResponse.totalPages); let pageIndex = index"
+        <li class="page-item" *ngFor="let _ of [].constructor(transactionResponse.totalPages); let pageIndex = index"
             [class.active]="page === pageIndex">
-          <a class="page-link" href="javascript:void(0)" (click)="goToPage(pageIndex)">
-            {{ pageIndex + 1 }}
-          </a>
+          <a class="page-link" (click)="goToPage(pageIndex)">{{ pageIndex + 1 }}</a>
         </li>
         <li class="page-item" [class.disabled]="isLastPage()">
-          <a class="page-link" href="javascript:void(0)" (click)="goToNextPage()">
+          <a class="page-link" (click)="goToNextPage()" aria-label="Next">
             <i class="fas fa-angle-right"></i>
           </a>
         </li>
         <li class="page-item" [class.disabled]="isLastPage()">
-          <a class="page-link" href="javascript:void(0)" (click)="goToLastPage()">
+          <a class="page-link" (click)="goToLastPage()" aria-label="Last">
             <i class="fas fa-angles-right"></i>
           </a>
         </li>
