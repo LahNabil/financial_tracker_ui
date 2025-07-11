@@ -1,0 +1,119 @@
+$primary-color: #78bdb9;
+$primary-light: lighten($primary-color, 15%);
+$primary-dark: darken($primary-color, 10%);
+$success-color: #27ae60;
+$danger-color: #e74c3c;
+
+.budget-form-container {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 0 1.5rem;
+
+  .header-section {
+    .page-title {
+      color: #2c3e50;
+      font-weight: 700;
+      font-size: 2.2rem;
+      margin-bottom: 0.5rem;
+
+      i {
+        color: $primary-color;
+      }
+    }
+
+    .header-divider {
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(90deg, $primary-color, $primary-light);
+      margin: 0 auto 1rem;
+      border-radius: 2px;
+    }
+
+    .page-subtitle {
+      color: #7f8c8d;
+      font-size: 1.1rem;
+    }
+  }
+
+  .alert-custom {
+    border-radius: 8px;
+    padding: 1rem 1.5rem;
+    border-left: 4px solid $danger-color;
+    background-color: rgba($danger-color, 0.05);
+
+    i {
+      font-size: 1.5rem;
+      color: $danger-color;
+    }
+  }
+
+  .form-card {
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  }
+
+  .form-floating {
+    position: relative;
+
+    label {
+      color: #7f8c8d;
+      padding-left: 2.5rem;
+      padding-top: 0.4rem;
+    }
+
+    .form-control {
+      height: calc(3.5rem + 2px);
+      padding: 1.3rem 1.5rem 0.7rem 3rem; // more top padding
+      border: 2px solid #ecf0f1;
+      border-radius: 8px;
+      transition: all 0.3s;
+      font-size: 1rem;
+
+      &:focus {
+        border-color: $primary-color;
+        box-shadow: 0 0 0 0.25rem rgba($primary-color, 0.25);
+      }
+    }
+
+    i {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: $primary-color;
+      z-index: 2;
+    }
+  }
+
+  .btn-save {
+    background: $primary-color;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s;
+    min-width: 180px;
+
+    &:hover {
+      background: $primary-dark;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba($primary-color, 0.3);
+    }
+  }
+
+  .btn-cancel {
+    color: $danger-color;
+    background: rgba($danger-color, 0.1);
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s;
+    min-width: 160px;
+
+    &:hover {
+      background: rgba($danger-color, 0.2);
+      color: darken($danger-color, 10%);
+    }
+  }
+}

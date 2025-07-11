@@ -55,6 +55,7 @@ $danger-color: #e74c3c;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
   }
 
+
   .form-floating {
     margin-bottom: 1.5rem;
 
@@ -62,14 +63,26 @@ $danger-color: #e74c3c;
       color: #7f8c8d;
       padding-left: 2.5rem;
     }
-
-    .form-control, .form-select {
+    .form-control{
       height: calc(3.5rem + 2px);
       padding: 1rem 1.5rem;
       border: 2px solid #ecf0f1;
       border-radius: 8px;
       transition: all 0.3s;
       font-size: 1rem;
+      padding-top: 2rem;
+      padding-bottom: 0.6rem;
+    }
+
+
+    .form-select {
+      height: calc(3.5rem + 2px);
+      padding: 1rem 1.5rem;
+      border: 2px solid #ecf0f1;
+      border-radius: 8px;
+      transition: all 0.3s;
+      font-size: 1rem;
+      
 
       &:focus {
         border-color: $primary-color;
