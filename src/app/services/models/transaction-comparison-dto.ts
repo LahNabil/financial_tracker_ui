@@ -6,6 +6,4 @@ import { TransactionDto } from '../models/transaction-dto';
 export interface TransactionComparisonDto {
   expectedTransactions?: Array<TransactionDto>;
   realTransactions?: Array<TransactionDto>;
-  totalExpected?: number;
-  totalReal?: number;
 }

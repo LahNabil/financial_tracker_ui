@@ -122,6 +122,36 @@
         }
       }
     },
+    "/api/v1/profile/password": {
+      "put": {
+        "tags": [
+          "profile-controller"
+        ],
+        "operationId": "updatePassword",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdatePasswordRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/budget/{id}": {
       "get": {
         "tags": [
@@ -531,6 +561,26 @@
         }
       }
     },
+    "/api/v1/profile/": {
+      "get": {
+        "tags": [
+          "profile-controller"
+        ],
+        "operationId": "getProfile",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProfileResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/dashboard/line": {
       "get": {
         "tags": [
@@ -750,6 +800,17 @@
           }
         }
       },
+      "UpdatePasswordRequest": {
+        "type": "object",
+        "properties": {
+          "oldPassword": {
+            "type": "string"
+          },
+          "newPassword": {
+            "type": "string"
+          }
+        }
+      },
       "BudgetPlanDto": {
         "required": [
           "initialIncome",
@@ -860,6 +921,20 @@
           }
         }
       },
+      "ProfileResponse": {
+        "type": "object",
+        "properties": {
+          "firstname": {
+            "type": "string"
+          },
+          "lastname": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          }
+        }
+      },
       "TransactionComparisonDto": {
         "type": "object",
         "properties": {
@@ -874,12 +949,6 @@
             "items": {
               "$ref": "#/components/schemas/TransactionDto"
             }
-          },
-          "totalReal": {
-            "type": "number"
-          },
-          "totalExpected": {
-            "type": "number"
           }
         }
       },

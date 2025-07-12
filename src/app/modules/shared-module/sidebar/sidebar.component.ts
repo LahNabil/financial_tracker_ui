@@ -1,5 +1,4 @@
 import {Component, EventEmitter, HostListener, Output} from '@angular/core';
-import {navbarData} from "./nav-data";
 
 interface SideNavToggle{
   screenWidth: number;
@@ -16,7 +15,6 @@ export class SidebarComponent {
   @Output() onToggleSideNav : EventEmitter<SideNavToggle> = new EventEmitter();
   collapsed = false;
   screenWidth =0;
-  navData =navbarData;
   @HostListener('window:resize',['$event'])
   onResize(event: any) {
     this.screenWidth = window.innerWidth;
