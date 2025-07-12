@@ -1,0 +1,54 @@
+<!-- profile.component.html -->
+<div class="profile-page-container">
+  <!-- Header Section -->
+  <div class="header-section text-center mb-5">
+    <h2 class="page-title">
+      <i class="fas fa-user-circle me-2"></i>
+      Profile
+    </h2>
+    <div class="header-divider"></div>
+    <p class="page-subtitle">Manage your personal information</p>
+  </div>
+
+  <!-- Profile Card -->
+  <div class="card shadow-lg border-0 profile-card p-4 p-md-5">
+    <div *ngIf="!isLoading && profile">
+      <div class="row g-4">
+        <div class="col-md-6">
+          <div class="info-block">
+            <label class="form-label"><i class="fas fa-user me-2"></i>First Name</label>
+            <p class="form-value">{{ profile.firstname }}</p>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="info-block">
+            <label class="form-label"><i class="fas fa-user me-2"></i>Last Name</label>
+            <p class="form-value">{{ profile.lastname }}</p>
+          </div>
+        </div>
+
+        <div class="col-md-12">
+          <div class="info-block">
+            <label class="form-label"><i class="fas fa-envelope me-2"></i>Email</label>
+            <p class="form-value">{{ profile.email }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="isLoading" class="text-center">
+      <i class="fas fa-spinner fa-spin me-2"></i>Loading profile...
+    </div>
+
+    <div *ngIf="error" class="alert alert-danger mt-3">
+      {{ error }}
+    </div>
+  </div>
+</div>
+<div class="text-center mt-4">
+  <a routerLink="/profile/change-password" class="btn btn-save px-4 py-3">
+    <i class="fas fa-key me-2"></i> Change Password
+  </a>
+</div>
+

@@ -1,0 +1,11 @@
+<app-header class="headbar"></app-header>
+
+<div class="layout d-flex">
+   <app-sidebar class="sidebar" (onToggleSideNav)="onToggleSideNav($event)"></app-sidebar>
+
+  <div class="d-flex flex-column gap-1 main-content flex-grow-1">
+    <div class="pe-2 ps-2">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
