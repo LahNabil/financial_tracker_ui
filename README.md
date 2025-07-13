@@ -45,14 +45,8 @@ Financial Tracker UI is a modern, performant frontend built with Angular 16 that
 
 Clone the repository
 
-```bash
 git clone https://github.com/LahNabil/financial_tracker_ui.git
 cd financial_tracker_ui
-Install dependencies
-
-bash
-Copier
-Modifier
 npm install
 Configure environment
 
