@@ -74,26 +74,20 @@ The app will be available at http://localhost:4200.
 
 📸 Screenshots
 ### Login Page
-
 ![Login Page](./screenshots/login-page.png)
 
 ### Dashboard
-
 ![Dashboard1](./screenshots/home-1.png)
 ![Dashboard2](./screenshots/home-2.png)
 
 ### Budgets
-
 ![Budget Management](./screenshots/budgets-page.png)
 
 ### Budget-Transactions
-
 ![Budget Management](./screenshots/budgets-transaction-page.png)
 
 ### Transactions Manager
-
 ![Budget Management](./screenshots/Manage-Transaction.png)
 
 ### Profile
-
 ![Budget Management](./screenshots/Profile-page.png)
