@@ -75,7 +75,7 @@ The app will be available at http://localhost:4200.
 📸 Screenshots
 ### Login Page
 
-![Login Page](https://github.com/LahNabil/financial_tracker_ui/blob/809587c3785ab35e04fa9a1fd3c4a6856da558e9/screenshots/login-page.png)
+![Login Page](./screenshots/login-page.png)
 
 ### Dashboard
 
