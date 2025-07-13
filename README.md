@@ -74,7 +74,7 @@ The app will be available at http://localhost:4200.
 
 📸 Screenshots
 ### Login Page
-![Login Page!](C:\Users\Lahla\Lahlalia\Projects\budget-tracker\budget-ui\budget-ui\screenshots\Profile-page.png)
+![Login Page!](https://github.com/user-attachments/assets/7834f1e7-e3fd-4486-a73b-0ffaf5cf0e84)
 
 ### Dashboard
 ![Dashboard1](./screenshots/home-1.png)
