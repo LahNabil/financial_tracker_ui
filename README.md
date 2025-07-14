@@ -10,7 +10,7 @@ Financial Tracker UI is a modern, performant frontend built with Angular 16 that
 
 ## ⚙️ Tech Stack
 
-- **Framework:** Angular 16
+- **Framework:** Angular 19
 - **Languages:** TypeScript, HTML, CSS (Tailwind CSS)
 - **State Management:** RxJS & Angular services
 - **Charts & Visualization:** ng2-charts (Chart.js wrapper)
