@@ -26,8 +26,12 @@
     <div class="card-body p-4 p-md-5">
       <form class="row g-4" (ngSubmit)="saveTransaction()">
         <!-- Title -->
+         <small class="form-text text-muted ms-1 mt-1">
+          * Title must be unique for each transaction.
+          </small>
         <div class="col-md-6">
           <div class="form-floating">
+            
             <input
               [(ngModel)]="transactionResponse.title"
               name="title"
@@ -63,6 +67,9 @@
         </div>
 
         <!-- Date -->
+        <small>
+         * Date must be in the same month and year as the BudgetPlan
+        </small>
         <div class="col-md-4">
           <div class="form-floating">
             <input
